@@ -1,0 +1,45 @@
+# Chille's .tcshrc
+# Updated 2013-10-20
+
+alias h            history 25
+alias j            jobs -l
+alias foad         su -m root -c "exec shutdown -p now"
+alias ls           ls -Fh --color
+alias nano         nano -w
+alias scpresume    rsync --partial --progress --rsh=ssh
+alias vim          open -a /Applications/MacPorts/MacVim.app/
+
+# Sort dotfiles first
+setenv LC_COLLATE C
+
+# A righteous umask
+#umask 77
+set autolist
+set filec
+set prompt="%{\033[0;1;32m%}[%{\033[37m%}%P %n%{\033[0;1;31m%}@%{\033[37m%}%M:%{\033[32m%}%{\033[33m%}%c6%{\033[32m%}]%{\033[0m%} "
+
+set path = (/opt/local/bin /opt/local/sbin /sw/bin/ /sw/sbin /bin /sbin /usr/bin /usr/sbin /usr/local/bin /usr/X11R6/bin /usr/local/sbin $HOME/bin $HOME/bin/backup /usr/local/mysql/bin $HOME/bin/Sublime)
+
+setenv TERM		rxvt
+setenv EDITOR		nano
+setenv PAGER		less
+setenv BLOCKSIZE	K
+setenv LC_CTYPE		en_US.UTF-8
+setenv BROWSER		opera
+setenv TERMCMD		rxvt
+
+if ($?prompt) then
+	# An interactive shell -- set some stuff up
+	set filec
+	set history = 100
+	set savehist = 100
+	set mail = (/var/mail/$USER)
+	if ( $?tcsh ) then
+		bindkey "^W" backward-delete-word
+		bindkey -k up history-search-backward
+		bindkey -k down history-search-forward
+	endif
+endif
+
+rehash
+set nobeep
