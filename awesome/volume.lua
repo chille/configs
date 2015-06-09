@@ -1,7 +1,11 @@
+local awful = require("awful")
+local wibox = require("wibox")
+
 volumecfg = {}
-volumecfg.cardid  = 0
+volumecfg.cardid  = 1 -- 1 on MacBook
 volumecfg.channel = "Master"
-volumecfg.widget = widget({ type = "textbox", name = "volumecfg.widget", align = "right" })
+volumecfg.widget = wibox.widget.textbox()
+volumecfg.widget:set_align("right")
 
 volumecfg.mixercommand = function (command)
 	-- Run the command
@@ -21,7 +25,7 @@ volumecfg.mixercommand = function (command)
 	else   
 		volume = volume .. "M"
 	end
-	volumecfg.widget.text = volume
+	volumecfg.widget:set_text(volume)
 end
 
 volumecfg.update = function ()
@@ -49,6 +53,6 @@ volumecfg.widget:buttons(awful.util.table.join(
 
 volumecfg.update()
 
-awesome.add_signal("timer", function (timeout)
+awesome.connect_signal("timer", function (timeout)
 	volumecfg.update()
 end)
