@@ -30,7 +30,7 @@ local settings = {
    preview_box_bg = "#ddddddaa",
    preview_box_border = "#22222200",
    preview_box_fps = 30,
-   preview_box_delay = 150,
+   preview_box_delay = 0,
 
    client_opacity = false,
    client_opacity_value = 0.5,
@@ -39,7 +39,7 @@ local settings = {
 
 -- Create a wibox to contain all the client-widgets
 local preview_wbox = wibox({ width = screen[mouse.screen].geometry.width })
-preview_wbox.border_width = 3
+preview_wbox.border_width = 30
 preview_wbox.ontop = true
 preview_wbox.visible = false
 
@@ -60,6 +60,8 @@ local function preview()
    -- Apply settings
    preview_wbox:set_bg(settings.preview_box_bg)
    preview_wbox.border_color = settings.preview_box_border
+--   preview_wbox.screen = screen[mouse.screen]
+
 
    local preview_widgets = {}
    
@@ -70,7 +72,14 @@ local function preview()
    local h = w * 0.75  -- widget height
    local textboxHeight = 30
 
-   local x = -preview_wbox.border_width
+   local x = 0
+   if mouse.screen == 1 then
+      x = 0
+   else
+      x = 2560
+   end
+
+--   local x = -preview_wbox.border_width
    local y = (screen[mouse.screen].geometry.height - h - textboxHeight) / 2
    preview_wbox:geometry({x = x, y = y, width = W, height = h + textboxHeight})
 
@@ -82,14 +91,18 @@ local function preview()
       nLeft = 0
       nRight = 2
    else
-      nLeft = math.floor(#altTabTable / 2)
-      nRight = math.ceil(#altTabTable / 2)
+      nLeft = math.ceil(#altTabTable / 2)
+      nRight = math.floor(#altTabTable / 2)
    end
 
-   for i = 1, nLeft do
-      table.insert(leftRightTab, altTabTable[#altTabTable - nLeft + i])
-   end
-   for i = 1, nRight do
+--   for i = 1, nLeft do
+--      table.insert(leftRightTab, altTabTable[#altTabTable - nLeft + i])
+--   end
+--   for i = 1, nRight do
+--      table.insert(leftRightTab, altTabTable[i])
+--   end
+
+   for i = 1, #altTabTable do
       table.insert(leftRightTab, altTabTable[i])
    end
 
@@ -139,7 +152,7 @@ local function preview()
 	    local overlay = 0.6
 	    local fontSize = smallFont
 	    if c == altTabTable[altTabIndex] then
-	       a = 0.9
+	       a = 1.2
 	       overlay = 0
 	       fontSize = bigFont
 	    end
@@ -377,10 +390,14 @@ local function switch(dir, alt, tab, shift_tab)
 
    -- Now that we have collected all windows, we should run a keygrabber
    -- as long as the user is alt-tabbing:
+   keygrabber.stop()
    keygrabber.run(
       function (mod, key, event)  
+--   naughty.notify({ text=key })
+
 	 -- Stop alt-tabbing when the alt-key is released
-	 if key == alt or key == "Escape" and event == "release" then
+    if key == "Super_L" or key == "Escape" and event == "release" then
+--      naughty.notify({ text="Keygrabber started2" })
 	    preview_wbox.visible = false
 	    applyOpacity = false
 	    preview_live_timer:stop()
