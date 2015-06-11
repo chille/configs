@@ -1,5 +1,6 @@
 local awful = require("awful")
 local naughty = require("naughty")
+local brightness = require("brightness")
 
 -- Reset all key mapping
 globalkeys = {}
@@ -67,12 +68,12 @@ clientkeys = awful.util.table.join(
 
 
 globalkeys = awful.util.table.join(
-	awful.key({ }, "XF86MonBrightnessDown", function () meep.vroom("Brightness down") end),   -- F1
-	awful.key({ }, "XF86MonBrightnessUp",   function () meep.vroom("Brightness up") end),     -- F2
+	awful.key({ }, "XF86MonBrightnessDown", function () brightnesscfg.screen_down() end),     -- F1
+	awful.key({ }, "XF86MonBrightnessUp",   function () brightnesscfg.screen_up()   end),     -- F2
 	awful.key({ }, "XF86LaunchA",           function () revelation() end),                    -- F3
 	awful.key({ }, "XF86LaunchB",           function () meep.vroom("2") end),                 -- F4
-	awful.key({ }, "XF86KbdBrightnessDown", function () meep.vroom("Keyboard brigthness down") end),                 -- F5
-	awful.key({ }, "XF86KbdBrightnessUp",   function () meep.vroom("Keyboard brightness up") end),                 -- F6
+	awful.key({ }, "XF86KbdBrightnessDown", function () brightnesscfg.keyboard_down() end),   -- F5
+	awful.key({ }, "XF86KbdBrightnessUp",   function () brightnesscfg.keyboard_up() end),     -- F6
 	awful.key({ }, "XF86AudioPrev",         function () meep.vroom("Prev") end),              -- F7
 	awful.key({ }, "XF86AudioPlay",         function () meep.vroom("Play") end),              -- F8
 	awful.key({ }, "XF86AudioNext",         function () meep.vroom("Next") end),              -- F9
