@@ -1,14 +1,17 @@
+# Install:
+
+# Load with setxkbmap -rules evdev -model evdev -layout chille
+
 partial default alphanumeric_keys 
 xkb_symbols "basic" {
     include "latin"
 
-    name[Group1]= "Sweden - Mac";
+    name[Group1]= "Sweden - Mac - Chille";
 
-    key <LSGT> { [     section,       degree                             ] };
     key <AE01> { [           1,       exclam,     copyright,  exclamdown ] };
     key <AE02> { [           2,     quotedbl,            at,   oneeighth ] };
     key <AE03> { [           3,   numbersign,      sterling,         yen ] };
-    key <AE04> { [           4,     currency,        dollar,	       cent ] };
+    key <AE04> { [           4,     currency,        dollar,        cent ] };
     key <AE06> { [           6,    ampersand                             ] };
     key <AE07> { [           7,        slash,           bar,   backslash ] };
     key <AE08> { [           8,    parenleft,   bracketleft,   braceleft ] };
@@ -18,14 +21,18 @@ xkb_symbols "basic" {
     key <AE10> { [           0,        equal                             ] };
     key <AB09> { [      period,        colon                             ] };
     key <AB10> { [       minus,   underscore                             ] };
-    key	<AC10> { [  odiaeresis,   Odiaeresis,        oslash,    Ooblique ] };
+    key <AC10> { [  odiaeresis,   Odiaeresis,        oslash,    Ooblique ] };
     key <AE11> { [        plus,     question                             ] };
     key <AC11> { [  adiaeresis,   Adiaeresis,            ae,          AE ] };
     key <AD11> { [       aring,        Aring                             ] };
     key <AE12> { [       acute,        grave                             ] };
     key <AD12> { [   diaeresis,  asciicircum,    asciitilde              ] };
+
     key <BKSL> { [  apostrophe,     asterisk,            at              ] };
-    key <TLDE> { [        less,      greater,           bar,   brokenbar ] };
+
+    key <LSGT> { [        less,      greater,           bar,   brokenbar ] };
+    key <TLDE> { [     section,       degree                             ] };
+
 
     // Keypad dot
     key.type[Group1]="KEYPAD" ;
@@ -38,6 +45,15 @@ xkb_symbols "basic" {
     modifier_map Mod5   { ISO_Level3_Shift };
 };
 
+partial alphanumeric_keys 
+xkb_symbols "mixed" {
+    include "chille(basic)"
+
+    name[Group1]= "Sweden - Mac, mixed BKSL / TLDE";
+
+    key <TLDE> { [        less,      greater,           bar,   brokenbar ] };
+    key <LSGT> { [     section,       degree                             ] };
+};
 
 partial alphanumeric_keys 
 xkb_symbols "nodeadkeys" {
