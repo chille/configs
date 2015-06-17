@@ -30,8 +30,8 @@ xkb_symbols "basic" {
 
     key <BKSL> { [  apostrophe,     asterisk,            at              ] };
 
-    key <LSGT> { [        less,      greater,           bar,   brokenbar ] };
-    key <TLDE> { [     section,       degree                             ] };
+    key <TLDE> { [        less,      greater,           bar,   brokenbar ] };
+    key <LSGT> { [     section,       degree                             ] };
 
 
     // Keypad dot
@@ -51,8 +51,8 @@ xkb_symbols "mixed" {
 
     name[Group1]= "Sweden - Mac, mixed BKSL / TLDE";
 
-    key <TLDE> { [        less,      greater,           bar,   brokenbar ] };
-    key <LSGT> { [     section,       degree                             ] };
+    key <LSGT> { [        less,      greater,           bar,   brokenbar ] };
+    key <TLDE> { [     section,       degree                             ] };
 };
 
 partial alphanumeric_keys 
