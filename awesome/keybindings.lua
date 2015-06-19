@@ -8,47 +8,60 @@ clientkeys = {}
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
---		awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
---		awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
---		awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
+--	awful.key({ modkey, "Control" }, "o",      function (c) awful.client.movetoscreen(c, 0) end                        ),
 
---		awful.key({ modkey,           }, "j",
---				function ()
---						awful.client.focus.byidx( 1)
---						if client.focus then client.focus:raise() end
---				end),
---		awful.key({ modkey,           }, "k",
---				function ()
---						awful.client.focus.byidx(-1)
---						if client.focus then client.focus:raise() end
---				end),
+	-- all minimized clients are restored
+	awful.key({ modkey, "Control" }, "e",
+		function()
+			local tag = awful.tag.selected()
+			for i=1, #tag:clients() do
+				c = tag:clients()[i]
+				awful.placement.no_offscreen(c)
+			end
+			naughty.notify({ text="Out-of-screen windows moved into screen" })
+		end),
 
-		-- Layout manipulation
---		awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
---		awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
---		awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
---		awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
-		awful.key({ modkey,           }, "Tab",
-				function ()
-						alttab.switch(1, modkey, "Tab", "ISO_Left_Tab")
-				end),
-		awful.key({ modkey,           }, "Tab",
-				function ()
-						alttab.switch(-1, modkey, "Tab", "ISO_Left_Tab")
-				end),
---		awful.key({ modkey, "Control" }, "n", awful.client.restore),
+--	awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
+--	awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
+--	awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
 
-		-- Prompt
-		awful.key({ modkey            }, " ", function () mypromptbox[mouse.screen]:run() end),
+--	awful.key({ modkey,           }, "j",
+--		function ()
+--			awful.client.focus.byidx( 1)
+--			if client.focus then client.focus:raise() end
+--		end),
+--	awful.key({ modkey,           }, "k",
+--		function ()
+--			awful.client.focus.byidx(-1)
+--			if client.focus then client.focus:raise() end
+--		end),
 
---		awful.key({ modkey }, "Control", "r",
---							function ()
---									awful.prompt.run({ prompt = "Run Lua code: " },
---									mypromptbox[mouse.screen].widget,
---									awful.util.eval, nil,
---									awful.util.getdir("cache") .. "/history_eval")
---							end),
-		globalkeys
+	-- Layout manipulation
+--	awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
+--	awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
+--	awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
+--	awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
+	awful.key({ modkey,           }, "Tab",
+		function ()
+			alttab.switch(1, modkey, "Tab", "ISO_Left_Tab")
+		end),
+	awful.key({ modkey,           }, "Tab",
+		function ()
+			alttab.switch(-1, modkey, "Tab", "ISO_Left_Tab")
+		end),
+--	awful.key({ modkey, "Control" }, "n", awful.client.restore),
+
+	-- Prompt
+	awful.key({ modkey            }, " ", function () mypromptbox[mouse.screen]:run() end),
+
+--	awful.key({ modkey }, "Control", "r",
+--		function ()
+--			awful.prompt.run({ prompt = "Run Lua code: " },
+--			mypromptbox[mouse.screen].widget,
+--			awful.util.eval, nil,
+--			awful.util.getdir("cache") .. "/history_eval")
+--		end),
+	globalkeys
 )
 
 clientkeys = awful.util.table.join(
