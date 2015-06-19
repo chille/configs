@@ -17,6 +17,7 @@ local menubar = require("menubar")
 alttab = require("alttab")
 
 require("widgets")
+--require("batterywidget")
 require("volume")
 
 -- Load Debian menu entries
@@ -181,6 +182,12 @@ for s = 1, screen.count() do
 		right_layout:add(mpdwidget)
 		right_layout:add(separator)
 
+		-- Battery status
+--		right_layout:add(batterywidget)
+--		right_layout:add(fsicon)
+--		right_layout:add(separator)
+
+
 		-- Network
 		right_layout:add(dnicon)
 		right_layout:add(netwidgetdn)
@@ -231,9 +238,7 @@ end
 
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
-		awful.button({ }, 3, function () mymainmenu:toggle() end),
-		awful.button({ }, 4, awful.tag.viewnext),
-		awful.button({ }, 5, awful.tag.viewprev)
+		awful.button({ }, 3, function () mymainmenu:toggle() end)
 ))
 -- }}}
 
