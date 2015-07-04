@@ -1,7 +1,10 @@
 # Install:
 
 # Load:
+# sudo ln -s /home/chille/configs/keyboardlayout /usr/share/X11/xkb/symbols/chille
 # setxkbmap -rules evdev -model evdev -layout chille
+#
+# Note: "-variant mixed" could also be added to swap < and §
 
 partial default alphanumeric_keys 
 xkb_symbols "basic" {
