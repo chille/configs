@@ -15,20 +15,17 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 
 alttab = require("alttab")
-
 require("widgets")
---require("batterywidget")
+require("move_windows")
 require("volume")
-
--- Load Debian menu entries
 require("debian.menu")
-
 require("taskbar");
 
 -- TODO
 --require("chille")
 --require("quicklaunch")
 --require("revelation")
+--require("batterywidget")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -91,44 +88,50 @@ local layouts =
 }
 -- }}}
 
--- {{{ Wallpaper
+-- Wallpaper
 if beautiful.wallpaper then
 		for s = 1, screen.count() do
 				gears.wallpaper.maximized(beautiful.wallpaper, s, true)
 		end
 end
--- }}}
 
--- {{{ Tags
--- Define a tag table which hold all screen tags.
+-- Tags: Define a tag table which hold all screen tags.
 tags = {}
 for s = 1, screen.count() do
 		-- Each screen has its own tag table.
 		tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
 end
--- }}}
 
 -- {{{ Menu
 -- Create a laucher widget and a main menu
 myawesomemenu = {
-	 { "manual", terminal .. " -e man awesome" },
-	 { "edit config", editor_cmd .. " " .. awesome.conffile },
-	 { "restart", awesome.restart },
-	 { "quit", awesome.quit }
+	{ "manual", terminal .. " -e man awesome" },
+	{ "edit config", editor_cmd .. " " .. awesome.conffile },
+	{ "restart", awesome.restart },
+	{ "quit", awesome.quit }
 }
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-																		{ "Debian", debian.menu.Debian_menu.Debian },
-																		{ "open terminal", terminal }
-																	}
-												})
+chillemenu = {
+	{ "Windows to left screen",  move_windows_left },
+	{ "Windows to right screen", move_windows_right },
+	{ "No off screen",   move_windows_inside }
+}
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-																		 menu = mymainmenu })
+mymainmenu = awful.menu(
+{
+	items =
+	{
+		{ "awesome", myawesomemenu, beautiful.awesome_icon },
+		{ "chille", chillemenu, beautiful.awesome_icon },
+		{ "Debian", debian.menu.Debian_menu.Debian },
+		{ "open terminal", terminal }
+	}
+})
+
+mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = mymainmenu })
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
--- }}}
 
 -- {{{ Wibox
 -- Create a textclock widget
@@ -140,107 +143,105 @@ mypromptbox = {}
 mylayoutbox = {}
 mytaglist = {}
 mytaglist.buttons = awful.util.table.join(
-										awful.button({ }, 1, awful.tag.viewonly),
-										awful.button({ modkey }, 1, awful.client.movetotag),
-										awful.button({ }, 3, awful.tag.viewtoggle),
-										awful.button({ modkey }, 3, awful.client.toggletag)
-										)
+	awful.button({ }, 1, awful.tag.viewonly),
+	awful.button({ modkey }, 1, awful.client.movetotag),
+	awful.button({ }, 3, awful.tag.viewtoggle),
+	awful.button({ modkey }, 3, awful.client.toggletag)
+)
 
 
 for s = 1, screen.count() do
-		-- Create a promptbox for each screen
-		mypromptbox[s] = awful.widget.prompt()
-		-- Create an imagebox widget which will contains an icon indicating which layout we're using.
-		-- We need one layoutbox per screen.
-		mylayoutbox[s] = awful.widget.layoutbox(s)
-		mylayoutbox[s]:buttons(awful.util.table.join(
-													 awful.button({ }, 1, function () awful.layout.inc(layouts, 1) end),
-													 awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
-													 awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
-													 awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
-		-- Create a taglist widget
-		mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
+	-- Create a promptbox for each screen
+	mypromptbox[s] = awful.widget.prompt()
+	-- Create an imagebox widget which will contains an icon indicating which layout we're using.
+	-- We need one layoutbox per screen.
+	mylayoutbox[s] = awful.widget.layoutbox(s)
+	mylayoutbox[s]:buttons(awful.util.table.join(
+		awful.button({ }, 1, function () awful.layout.inc(layouts, 1) end),
+		awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
+		awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
+		awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end))
+	)
+	-- Create a taglist widget
+	mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
+
+	-- Create the wibox
+	mywibox[s] = awful.wibox({ position = "top", screen = s })
+
+	-- Widgets that are aligned to the left
+	local left_layout = wibox.layout.fixed.horizontal()
+	left_layout:add(mylauncher)
+	left_layout:add(mytaglist[s])
+	-- TODO launchbar
+	left_layout:add(mypromptbox[s])
+
+	-- Widgets that are aligned to the right
+	local right_layout = wibox.layout.fixed.horizontal()
+
+	right_layout:add(separator)
+
+	-- Music player
+	-- TODO
+	right_layout:add(mpdwidget)
+	right_layout:add(separator)
+
+	-- Battery status
+--	right_layout:add(batterywidget)
+--	right_layout:add(fsicon)
+--	right_layout:add(separator)
 
 
-		-- Create the wibox
-		mywibox[s] = awful.wibox({ position = "top", screen = s })
+	-- Network
+	right_layout:add(dnicon)
+	right_layout:add(netwidgetdn)
+	right_layout:add(upicon)
+	right_layout:add(netwidgetup)
+	right_layout:add(separator)
 
-		-- Widgets that are aligned to the left
-		local left_layout = wibox.layout.fixed.horizontal()
-		left_layout:add(mylauncher)
-		left_layout:add(mytaglist[s])
-		-- TODO launchbar
-		left_layout:add(mypromptbox[s])
+	-- CPU
+	right_layout:add(cpuicon)
+	right_layout:add(cpuwidget)
+	right_layout:add(separator)
 
-		-- Widgets that are aligned to the right
-		local right_layout = wibox.layout.fixed.horizontal()
+	-- Memory
+	right_layout:add(memicon)
+	right_layout:add(memwidget)
+	right_layout:add(separator)
 
-		right_layout:add(separator)
+	-- File system
+	right_layout:add(fsicon)
+	right_layout:add(fswidget)
+	right_layout:add(separator)
 
-		-- Music player
-		-- TODO
-		right_layout:add(mpdwidget)
-		right_layout:add(separator)
+	-- Volume
+	right_layout:add(volicon)
+	right_layout:add(volumecfg.widget)
+	right_layout:add(separator)
 
-		-- Battery status
---		right_layout:add(batterywidget)
---		right_layout:add(fsicon)
---		right_layout:add(separator)
+	-- Taskbar
+	-- TODO: 2 for right screen on MacBook
+	if s == 2 then right_layout:add(wibox.widget.systray()) end
+	right_layout:add(separator)
 
+	-- Clock
+	right_layout:add(mytextclock)
 
-		-- Network
-		right_layout:add(dnicon)
-		right_layout:add(netwidgetdn)
-		right_layout:add(upicon)
-		right_layout:add(netwidgetup)
-		right_layout:add(separator)
+	-- Layout switcher
+	right_layout:add(mylayoutbox[s])
 
-		-- CPU
-		right_layout:add(cpuicon)
-		right_layout:add(cpuwidget)
-		right_layout:add(separator)
+	-- Now bring it all together (with the tasklist in the middle)
+	local layout = wibox.layout.align.horizontal()
+	layout:set_left(left_layout)
+--	layout:set_middle(mytasklist[s])
+	layout:set_right(right_layout)
 
-		-- Memory
-		right_layout:add(memicon)
-		right_layout:add(memwidget)
-		right_layout:add(separator)
-
-		-- File system
-		right_layout:add(fsicon)
-		right_layout:add(fswidget)
-		right_layout:add(separator)
-
-		-- Volume
-		right_layout:add(volicon)
-		right_layout:add(volumecfg.widget)
-		right_layout:add(separator)
-
-		-- Taskbar
-		-- TODO: 2 for right screen on MacBook
-		if s == 2 then right_layout:add(wibox.widget.systray()) end
-		right_layout:add(separator)
-
-		-- Clock
-		right_layout:add(mytextclock)
-
-		-- Layout switcher
-		right_layout:add(mylayoutbox[s])
-
-		-- Now bring it all together (with the tasklist in the middle)
-		local layout = wibox.layout.align.horizontal()
-		layout:set_left(left_layout)
---		layout:set_middle(mytasklist[s])
-		layout:set_right(right_layout)
-
-		mywibox[s]:set_widget(layout)
+	mywibox[s]:set_widget(layout)
 end
--- }}}
 
--- {{{ Mouse bindings
+-- Mouse bindings
 root.buttons(awful.util.table.join(
-		awful.button({ }, 3, function () mymainmenu:toggle() end)
+	awful.button({ }, 3, function () mymainmenu:toggle() end)
 ))
--- }}}
 
 
 require("keybindings");
@@ -326,22 +327,10 @@ awful.rules.rules = {
 -- {{{ Rules
 --awful.rules.rules = {
 --		-- All clients will match this rule.
---		{ rule = { },
---			properties = { border_width = 1,--todo
---										 border_color = 1,--todo
---										 focus = true,
---										 keys = clientkeys,
---										 buttons = clientbuttons } },
---		{ rule = { class = "MPlayer" },
---			properties = { floating = true } },
---		{ rule = { class = "pinentry" },
---			properties = { floating = true } },
 --		{ rule = { instance = "plugin-container" },
 --				properties = { floating = true } },
 --		{ rule = { instance = "operapluginwrapper-native" },
 --				properties = { floating = true } },
---		{ rule = { class = "gimp" },
---			properties = { floating = true } },
 		-- Set Firefox to always map on tags number 2 of screen 1.
 		-- { rule = { class = "Firefox" },
 		--	 properties = { tag = tags[1][2] } },
