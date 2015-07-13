@@ -1,0 +1,5 @@
+#!/bin/sh
+
+roxterm &
+/home/chille/configs/bin/init.sh
+exec awesome
