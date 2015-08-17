@@ -3,3 +3,4 @@ warn_close=2
 edit_shortcuts=0
 shortcut_scheme=chille
 colour_scheme=Tango
+only_warn_running=1
