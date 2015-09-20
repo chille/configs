@@ -63,12 +63,9 @@ terminal = "x-terminal-emulator"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 
--- Default modkey.
--- Usually, Mod4 is the key with a logo between Control and Alt.
--- If you do not like this or do not have such a key,
--- I suggest you to remap Mod4 to another key using xmodmap or other tools.
--- However, you can use another modifier like Mod1, but it may interact with others.
+-- Keyboard bindings
 modkey = "Mod4"
+require("keybindings");
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
@@ -245,60 +242,11 @@ root.buttons(awful.util.table.join(
 ))
 
 
-require("keybindings");
-
--- Bind all key numbers to tags.
--- Be careful: we use keycodes to make it works on any keyboard layout.
--- This should map on the top row of your keyboard, usually 1 to 9.
-for i = 1, 9 do
-		globalkeys = awful.util.table.join(globalkeys,
-				-- View tag only.
-				awful.key({ modkey }, "#" .. i + 9,
-									function ()
-												local screen = mouse.screen
-												local tag = awful.tag.gettags(screen)[i]
-												if tag then
-													 awful.tag.viewonly(tag)
-												end
-									end),
-				-- Toggle tag.
-				awful.key({ modkey, "Control" }, "#" .. i + 9,
-									function ()
-											local screen = mouse.screen
-											local tag = awful.tag.gettags(screen)[i]
-											if tag then
-												 awful.tag.viewtoggle(tag)
-											end
-									end),
-				-- Move client to tag.
-				awful.key({ modkey, "Shift" }, "#" .. i + 9,
-									function ()
-											if client.focus then
-													local tag = awful.tag.gettags(client.focus.screen)[i]
-													if tag then
-															awful.client.movetotag(tag)
-													end
-										 end
-									end),
-				-- Toggle tag.
-				awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
-									function ()
-											if client.focus then
-													local tag = awful.tag.gettags(client.focus.screen)[i]
-													if tag then
-															awful.client.toggletag(tag)
-													end
-											end
-									end))
-end
-
 clientbuttons = awful.util.table.join(
 		awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
 		awful.button({ modkey }, 1, awful.mouse.client.move),
 		awful.button({ modkey }, 3, awful.mouse.client.resize))
 
--- Set keys
-root.keys(globalkeys)
 -- }}}
 
 -- {{{ Rules
@@ -418,3 +366,18 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 --client.add_signal("property::fullscreen", function()
 --	naughty.notify({ text="Fullscreen!" })
 --end);
+<<<<<<< HEAD
+=======
+
+client.connect_signal("focus", function(c)
+	if c.class == "Roxterm" then
+		os.execute("/home/chille/configs/bin/remapkeys.sh roxterm &")
+		modkey = "Mod4"
+	else
+		os.execute("/home/chille/configs/bin/remapkeys.sh other &")
+		modkey = "Control"
+	end
+
+	remapkeys()
+end)
+>>>>>>> 763af3545a7e3d3e4dd1cae031b5ecbf12f1a71e

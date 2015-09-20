@@ -2,7 +2,7 @@ local awful = require("awful")
 local wibox = require("wibox")
 
 volumecfg = {}
-volumecfg.cardid  = 1 -- 1 on MacBook
+volumecfg.cardid  = 0 -- 1 on MacBook
 volumecfg.channel = "Master"
 volumecfg.widget = wibox.widget.textbox()
 volumecfg.widget:set_align("right")
