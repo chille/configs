@@ -366,8 +366,6 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 --client.add_signal("property::fullscreen", function()
 --	naughty.notify({ text="Fullscreen!" })
 --end);
-<<<<<<< HEAD
-=======
 
 client.connect_signal("focus", function(c)
 	if c.class == "Roxterm" then
@@ -380,4 +378,3 @@ client.connect_signal("focus", function(c)
 
 	remapkeys()
 end)
->>>>>>> 763af3545a7e3d3e4dd1cae031b5ecbf12f1a71e
