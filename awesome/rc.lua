@@ -218,10 +218,11 @@ for s = 1, screen.count() do
 	right_layout:add(volumecfg.widget)
 	right_layout:add(separator)
 
-	-- Taskbar
-	-- TODO: 2 for right screen on MacBook
-	if s == 2 then right_layout:add(wibox.widget.systray()) end
-	right_layout:add(separator)
+	-- Taskbar (Always on the screen with highest number)
+	if s == screen.count() then
+		right_layout:add(wibox.widget.systray())
+		right_layout:add(separator)
+	end
 
 	-- Clock
 	right_layout:add(mytextclock)
