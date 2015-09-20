@@ -5,8 +5,6 @@ local brightness = require("brightness")
 globalkeys = {}
 
 remapkeys = function ()
---	naughty.notify({ text="Remapping" })
-
 	globalkeys = awful.util.table.join(
 --		awful.key({ modkey, "Control" }, "o",      function (c) awful.client.movetoscreen(c, 0) end ),
 
