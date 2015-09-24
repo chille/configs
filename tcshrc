@@ -43,3 +43,6 @@ endif
 
 rehash
 set nobeep
+
+# Always start from home directory
+cd ~
