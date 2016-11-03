@@ -1,3 +1,5 @@
 [roxterm profile]
 scrollback_lines=100000
 colour_scheme=
+font=Monospace 10
+browser=firefox -P "Another profile" %s
