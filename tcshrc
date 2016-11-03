@@ -1,6 +1,9 @@
 # Chille's .tcshrc
 # Updated 2013-10-20
 
+# Colors!
+set color
+
 alias h            history 25
 alias j            jobs -l
 alias foad         su -m root -c "exec shutdown -p now"
