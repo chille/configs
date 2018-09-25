@@ -11,6 +11,7 @@ alias ls           ls -Fh --color
 alias nano         nano -w
 alias scpresume    rsync --partial --progress --rsh=ssh
 alias vim          open -a /Applications/MacPorts/MacVim.app/
+alias mv           mv -i
 
 # Sort dotfiles first
 setenv LC_COLLATE C
