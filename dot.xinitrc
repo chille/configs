@@ -33,7 +33,8 @@ xset dpms 3600 3600 3600
 xset s off
 xset s noblank
 
+# Make sure the keys are mapped correctly
+/home/chille/configs/bin/remapkeys.sh other
+
 # Start window manager
 awesome
-
-#/home/chille/configs/bin/remapkeys.sh other

@@ -66,6 +66,7 @@ editor_cmd = terminal .. " -e " .. editor
 -- Keyboard bindings
 modkey = "Mod4"
 require("keybindings");
+remapkeys();
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
