@@ -1,59 +1,41 @@
- -- {{{ Battery state Widget
- 
- batterywidget = widget({
-     type = 'textbox',
-     name = 'batterywidget',
-     align = 'right'
-     })
- 
---vicious.register(batterywidget, 'function', function (widget, args)
-awesome.connect_signal("timer", function (timeout)
-     local f = io.open('/proc/acpi/battery/BAT0/info')
-     local infocontents = f:read('*all')
-     f:close()
- 
-     f = io.open('/proc/acpi/battery/BAT0/state')
-     local statecontents = f:read('*all')
-     f:close()
- 
-     local status, _
-     -- Find the full capacity (from info)
-     local full_cap
-     
-     status, _, full_cap = string.find(infocontents, "last full capacity:%s+(%d+).*")
- 
-     -- Find the current capacity, state and (dis)charge rate (from state)
-     local state, rate, current_cap
-     
-     status, _, state = string.find(statecontents, "charging state:%s+(%w+)")
-     status, _, rate  = string.find(statecontents, "present rate:%s+(%d+).*")
-     status, _, current_cap = string.find(statecontents, "remaining capacity:%s+(%d+).*")
- 
-     local prefix, percent, time
-     percent = current_cap / full_cap * 100
-     if state == "charged" then
-         return "AC: " .. fg("green", "100%")
-     elseif state == "charging" then
-         prefix = "AC: "
-         time = (full_cap - current_cap) / rate
-     elseif state == "discharging" then
-         prefix = "Battery: "
-         time = current_cap / rate
-     end
- 
-     time_hour = math.floor(time)
-     time_minute = math.floor((time - time_hour) * 60)
-     
-     percent = math.floor(percent)
-     local percent_string
-     if percent < 25 then
-         percent_string = fg("red", percent .. "%")
-     elseif percent < 50 then
-         percent_string = fg("orange", percent .. "%")
-     else
-         percent_string = fg("green", percent .. "%")
-     end
- 
-     return prefix .. percent_string .. " " .. string.format("(%02d:%02d)", time_hour, time_minute)
- end, 2)
- -- }}}
+local awful = require("awful")
+local wibox = require("wibox")
+
+batterywidget = wibox.widget.textbox()
+batterywidget:set_align("right")
+batterywidget:set_text("right")
+
+local timer1 = timer({}) --( {timeout = 1} )
+timer1.timeout = 1
+
+timer1:connect_signal("timeout", function()
+	local f = io.open('/sys/class/power_supply/BAT0/charge_full')
+	local charge_full = f:read('*all')
+	f:close()
+
+	local f = io.open('/sys/class/power_supply/BAT0/charge_now')
+	local charge_now = f:read('*all')
+	f:close()
+
+	local time = 1.5
+
+	local time_hour = math.floor(time)
+	local time_minute = math.floor((time - time_hour) * 60)
+	
+	local percent = math.floor(charge_now / charge_full * 100)
+
+	local percent_string = percent .. "%"
+
+	if percent < 25 then
+		percent_string = percent .. "%" --fg("red", percent .. "%")
+	elseif percent < 50 then
+		percent_string = percent .. "%" --fg("orange", percent .. "%")
+	else
+		percent_string = percent .. "%" --fg("green", percent .. "%")
+	end
+
+	local str = percent_string --.. " " .. string.format("(%02d:%02d)", time_hour, time_minute)
+	batterywidget:set_text(str)
+end)
+
+timer1:start()

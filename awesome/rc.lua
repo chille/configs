@@ -25,7 +25,7 @@ require("taskbar");
 --require("chille")
 --require("quicklaunch")
 --require("revelation")
---require("batterywidget")
+require("batterywidget")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -183,9 +183,9 @@ for s = 1, screen.count() do
 	right_layout:add(separator)
 
 	-- Battery status
---	right_layout:add(batterywidget)
---	right_layout:add(fsicon)
---	right_layout:add(separator)
+	right_layout:add(batterywidget)
+	right_layout:add(fsicon)
+	right_layout:add(separator)
 
 
 	-- Network
