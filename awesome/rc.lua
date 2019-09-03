@@ -27,6 +27,12 @@ require("taskbar");
 --require("revelation")
 require("batterywidget")
 
+-- Get hostname (Used for some configuration like what settings to use for screen backlight)
+local fd = io.popen("hostname")
+hostname = fd:read("*all")
+hostname = hostname:gsub("\n", "")
+fd:close()
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
