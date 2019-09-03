@@ -4,9 +4,17 @@ brightnesscfg = {}
 brightnesscfg.screen = {}
 brightnesscfg.keyboard = {}
 
-brightnesscfg.screen.device = "/sys/class/backlight/intel_backlight/brightness"
-brightnesscfg.screen.max = 1388
-brightnesscfg.screen.value = 50
+if hostname == "chille-macbook" then
+	brightnesscfg.screen.device = "/sys/class/backlight/nv_backlight/brightness"
+	brightnesscfg.screen.max = 100
+	brightnesscfg.screen.value = 5
+end
+
+if hostname == "chille-MacBook15" then
+	brightnesscfg.screen.device = "/sys/class/backlight/gmux_backlight/brightness"
+	brightnesscfg.screen.max = 1023
+	brightnesscfg.screen.value = 50
+end
 
 brightnesscfg.keyboard.device = "/sys/class/leds/smc::kbd_backlight/brightness"
 brightnesscfg.keyboard.max = 255
