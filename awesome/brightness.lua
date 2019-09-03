@@ -5,22 +5,24 @@ brightnesscfg.screen = {}
 brightnesscfg.keyboard = {}
 
 if hostname == "chille-macbook" then
-	brightnesscfg.screen.device = "/sys/class/backlight/nv_backlight/brightness"
-	brightnesscfg.screen.max = 100
+--	brightnesscfg.screen.device = "/sys/class/backlight/nv_backlight/brightness"
 	brightnesscfg.screen.value = 5
+	brightnesscfg.screen.mapping = {0, 1, 2, 4, 9, 17, 28, 41, 60, 100};
+	brightnesscfg.screen.setter = function(val) return "xrandr --output LVDS-0 --set Backlight " .. val end
 end
 
 if hostname == "chille-MacBook15" then
 	brightnesscfg.screen.device = "/sys/class/backlight/gmux_backlight/brightness"
-	brightnesscfg.screen.max = 1023
-	brightnesscfg.screen.value = 50
+	brightnesscfg.screen.value = 5
+	brightnesscfg.screen.mapping = {0, 114, 227, 341, 455, 568, 682, 796, 909, 1023};
+	brightnesscfg.screen.setter = function(val) return "echo " .. val .. " > " .. brightnesscfg.screen.device end
 end
 
 brightnesscfg.keyboard.device = "/sys/class/leds/smc::kbd_backlight/brightness"
 brightnesscfg.keyboard.max = 255
 brightnesscfg.keyboard.value = 50
 
-brightnesscfg.keyboard_set = function ()
+brightnesscfg.keyboard_set = function()
 	naughty.notify({ text="Keyboard: " .. brightnesscfg.keyboard.value .. "%" })
 
 	local new_val = math.floor(brightnesscfg.keyboard.value * (brightnesscfg.keyboard.max / 100))
@@ -50,29 +52,26 @@ brightnesscfg.keyboard_down = function()
 end
 
 brightnesscfg.screen_set = function ()
-	naughty.notify({ text="Screen: " .. brightnesscfg.screen.value .. "%" })
-
-	local new_val = math.floor(brightnesscfg.screen.value * (brightnesscfg.screen.max / 100))
-
-	-- Run the command
-	os.execute("echo " .. new_val .. " > " .. brightnesscfg.screen.device);
+	local new_val = brightnesscfg.screen.mapping[brightnesscfg.screen.value];
+	naughty.notify({ text="Screen: " .. brightnesscfg.screen.value .. " = " .. new_val })
+	os.execute(brightnesscfg.screen.setter(new_val));
 end
 
 brightnesscfg.screen_up = function()
-	brightnesscfg.screen.value = brightnesscfg.screen.value + 10
+	brightnesscfg.screen.value = brightnesscfg.screen.value + 1
 
-	if brightnesscfg.screen.value > 100 then
-		brightnesscfg.screen.value = 100
+	if brightnesscfg.screen.value > 10 then
+		brightnesscfg.screen.value = 10
 	end
 
 	brightnesscfg.screen_set()
 end
 
 brightnesscfg.screen_down = function()
-	brightnesscfg.screen.value = brightnesscfg.screen.value - 10
+	brightnesscfg.screen.value = brightnesscfg.screen.value - 1
 
-	if brightnesscfg.screen.value < 0 then
-		brightnesscfg.screen.value = 0
+	if brightnesscfg.screen.value < 1 then
+		brightnesscfg.screen.value = 1
 	end
 
 	brightnesscfg.screen_set()
