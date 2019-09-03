@@ -32,12 +32,12 @@ remapkeys = function ()
 		),
 
 		-- Prompt
-		awful.key({ modkey            }, " ", function () mypromptbox[mouse.screen]:run() end),
+		awful.key({ modkey            }, " ", function () mypromptbox[mouse.screen.index]:run() end),
 
 --		awful.key({ modkey }, "Control", "r",
 --			function ()
 --				awful.prompt.run({ prompt = "Run Lua code: " },
---				mypromptbox[mouse.screen].widget,
+--				mypromptbox[mouse.screen.index].widget,
 --				awful.util.eval, nil,
 --				awful.util.getdir("cache") .. "/history_eval")
 --			end
@@ -73,7 +73,7 @@ remapkeys = function ()
 			-- View tag only.
 			awful.key({ modkey }, "#" .. i + 9,
 				function ()
-					local screen = mouse.screen
+					local screen = mouse.screen.index
 					local tag = awful.tag.gettags(screen)[i]
 					if tag then
 						awful.tag.viewonly(tag)
@@ -84,7 +84,7 @@ remapkeys = function ()
 			-- Toggle tag.
 			awful.key({ modkey, "Control" }, "#" .. i + 9,
 				function ()
-					local screen = mouse.screen
+					local screen = mouse.screen.index
 					local tag = awful.tag.gettags(screen)[i]
 					if tag then
 						 awful.tag.viewtoggle(tag)
