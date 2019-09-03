@@ -14,7 +14,7 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 
-alttab = require("alttab")
+--alttab = require("alttab")
 require("widgets")
 require("move_windows")
 require("volume")
