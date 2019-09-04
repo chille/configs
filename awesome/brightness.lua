@@ -5,17 +5,20 @@ brightnesscfg.screen = {}
 brightnesscfg.keyboard = {}
 
 if hostname == "chille-macbook" then
---	brightnesscfg.screen.device = "/sys/class/backlight/nv_backlight/brightness"
 	brightnesscfg.screen.value = 5
 	brightnesscfg.screen.mapping = {0, 1, 2, 4, 9, 17, 28, 41, 60, 100};
-	brightnesscfg.screen.setter = function(val) return "xrandr --output LVDS-0 --set Backlight " .. val end
+	brightnesscfg.screen.setter = function(val)
+		return "xrandr --output LVDS-0 --set Backlight " .. val
+--		return "echo " .. val .. " > /sys/class/backlight/nv_backlight/brightness"
+	end
 end
 
 if hostname == "chille-MacBook15" then
-	brightnesscfg.screen.device = "/sys/class/backlight/gmux_backlight/brightness"
 	brightnesscfg.screen.value = 5
 	brightnesscfg.screen.mapping = {0, 114, 227, 341, 455, 568, 682, 796, 909, 1023};
-	brightnesscfg.screen.setter = function(val) return "echo " .. val .. " > " .. brightnesscfg.screen.device end
+	brightnesscfg.screen.setter = function(val)
+		return "echo " .. val .. " > /sys/class/backlight/gmux_backlight/brightness"
+	end
 end
 
 brightnesscfg.keyboard.device = "/sys/class/leds/smc::kbd_backlight/brightness"
