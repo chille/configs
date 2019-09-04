@@ -22,7 +22,7 @@ set autolist
 set filec
 set prompt="%{\033[0;1;32m%}[%{\033[37m%}%P %n%{\033[0;1;31m%}@%{\033[37m%}%M:%{\033[32m%}%{\033[33m%}%c6%{\033[32m%}]%{\033[0m%} "
 
-set path = (/opt/local/bin /opt/local/sbin /sw/bin/ /sw/sbin /bin /sbin /usr/bin /usr/sbin /usr/local/bin /usr/X11R6/bin /usr/local/sbin $HOME/bin $HOME/bin/backup /usr/local/mysql/bin $HOME/bin/Sublime $HOME/.composer/vendor/bin)
+set path = (/opt/local/bin /opt/local/sbin /sw/bin/ /sw/sbin /bin /sbin /usr/bin /usr/sbin /usr/local/bin /usr/X11R6/bin /usr/local/sbin $HOME/bin $HOME/bin/backup /usr/local/mysql/bin $HOME/bin/Sublime $HOME/.composer/vendor/bin /snap/bin)
 
 setenv TERM		rxvt
 setenv EDITOR		nano
