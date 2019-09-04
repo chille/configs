@@ -70,7 +70,7 @@ editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Keyboard bindings
-modkey = "Mod4"
+modkey = "Control"
 require("keybindings");
 remapkeys();
 
