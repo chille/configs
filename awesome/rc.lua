@@ -284,8 +284,26 @@ awful.rules.rules = {
 		-- Set Firefox to always map on tags number 2 of screen 1.
 		-- { rule = { class = "Firefox" },
 		--	 properties = { tag = tags[1][2] } },
+
+		-- Prevent applications from running maximized
+		{ rule = { class = "Firefox" },
+			properties = { opacity = 1, maximized = false, floating = false } },
+		{ rule = { class = "VirtualBox" },
+			properties = { opacity = 1, maximized = false, floating = false } },
+		{ rule = { class = "Inkscape" },
+			properties = { opacity = 1, maximized = false, floating = false } },
 }
 -- }}}
+
+-- Prevent applications from running fullscreen, they should be within their tile
+local no_fullscreen = true
+local rule = { class = "Firefox" }
+client.disconnect_signal("request::geometry", awful.ewmh.geometry)
+client.connect_signal("request::geometry", function(c, context, ...)
+    if not no_fullscreen or context ~= "fullscreen" or not awful.rules.match(c, rule) then
+        awful.ewmh.geometry(c, context, ...)
+    end
+end)
 
 -- TODO
 -- {{{ Rules
