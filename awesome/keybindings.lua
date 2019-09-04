@@ -47,7 +47,7 @@ remapkeys = function ()
 		awful.key({ }, "XF86MonBrightnessDown", function () brightnesscfg.screen_down() end),     -- F1
 		awful.key({ }, "XF86MonBrightnessUp",   function () brightnesscfg.screen_up()   end),     -- F2
 		awful.key({ }, "XF86LaunchA",           function () revelation() end),                    -- F3
-		awful.key({ }, "XF86LaunchB",           function () meep.vroom("2") end),                 -- F4
+		awful.key({ }, "XF86LaunchB",           function () meep.vroom("F4") end),                -- F4
 		awful.key({ }, "XF86KbdBrightnessDown", function () brightnesscfg.keyboard_down() end),   -- F5
 		awful.key({ }, "XF86KbdBrightnessUp",   function () brightnesscfg.keyboard_up() end),     -- F6
 		awful.key({ }, "XF86AudioPrev",         function () meep.vroom("Prev") end),              -- F7
@@ -58,12 +58,12 @@ remapkeys = function ()
 		awful.key({ }, "XF86AudioRaiseVolume",  function () volumecfg.up() end),                  -- F12
 		awful.key({ }, "XF86Eject",             function () meep.vroom("Eject") end),             -- Eject
 
-		awful.key({ }, "XF86Tools",             function () toggleontop0() end),                  -- F13
-		awful.key({ }, "XF86Launch5",           function () toggleontop1() end),                  -- F14
-		awful.key({ }, "XF86Launch6",           function () meep.vroom("E3") end),                -- F15
+		awful.key({ }, "XF86Tools",             function () toggleontop() end),                   -- F13
+		awful.key({ }, "XF86Launch5",           function () meep.vroom("F14") end),               -- F14
+		awful.key({ }, "XF86Launch6",           function () meep.vroom("F15") end),               -- F15
 
 		awful.key({ }, "XF86Launch7",           function () awful.util.spawn("speedcrunch") end), -- F16
-		awful.key({ }, "XF86Launch8",           function () meep.vroom("NL2") end),               -- F17
+		awful.key({ }, "XF86Launch8",           function () meep.vroom("F17") end),               -- F17
 		awful.key({ }, "XF86Launch9",           function () awesome.restart() end),               -- F18
 		awful.key({ }, "#197",                  function () lockScreen() end)                     -- F19
 	)
@@ -131,16 +131,6 @@ end
 meep = {}
 meep.vroom = function (key)
 	naughty.notify({ text="Hai gaise! You just pressed: " .. key })
-end
-
-toggleontop0 = function ()
-	mywibox[2].ontop = not mywibox[2].ontop;
-	mytaskbar[2].ontop = not mytaskbar[2].ontop;
-end
-
-toggleontop1 = function ()
-	mywibox[1].ontop = not mywibox[1].ontop;
-	mytaskbar[1].ontop = not mytaskbar[1].ontop;
 end
 
 lockscreen = function ()
