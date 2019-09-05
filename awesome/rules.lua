@@ -17,8 +17,9 @@ awful.rules.rules = {
 		},
 
 		-- Prevent applications from running maximized
+		-- TODO: These two blocks are created in different versions of awsome. The first could probably be merged in to the second
 		{
-			rule = {
+			rule_any= {
 				class = {
 					"MPlayer",
 					"pinentry",
@@ -29,23 +30,29 @@ awful.rules.rules = {
 				floating = true
 			}
 		},
-
+		{
+			rule_any = {
+				class = {
+					"VirtualBox",
+					"Inkscape"
+				}
+			},
+			properties = { opacity = 1, maximized = false, floating = false }
+		},
 
 		-- Set Firefox to always map on tags number 2 of screen 1.
 		-- { rule = { class = "Firefox" },
 		--	 properties = { tag = tags[1][2] } },
 
-
+		-- Firefox' main window is "Navigator" and should not be maximized or floating
+		-- All other windows should be floating and centered on screen
+		{
+			rule = { class = "Firefox", instance = "Navigator" },
+			properties = { opacity = 1, maximized = false, floating = false }
+		},
 		{
 			rule = { class = "Firefox" },
-			properties = { opacity = 1, maximized = false, floating = false }
-		},
-		{
-			rule = { class = "VirtualBox" },
-			properties = { opacity = 1, maximized = false, floating = false }
-		},
-		{
-			rule = { class = "Inkscape" },
-			properties = { opacity = 1, maximized = false, floating = false }
-		},
+			except = { instance = "Navigator" },
+			properties = { maximized = false, floating = true, placement = awful.placement.centered }
+		}
 }
