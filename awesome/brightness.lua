@@ -4,7 +4,7 @@ brightnesscfg = {}
 brightnesscfg.screen = {}
 brightnesscfg.keyboard = {}
 
-if hostname == "chille-macbook" then
+if hostname == "chille-macbook13" then
 	brightnesscfg.screen.value = 5
 	brightnesscfg.screen.mapping = {0, 1, 2, 4, 9, 17, 28, 41, 60, 100};
 	brightnesscfg.screen.setter = function(val)
@@ -13,7 +13,7 @@ if hostname == "chille-macbook" then
 	end
 end
 
-if hostname == "chille-MacBook15" then
+if hostname == "chille-macbook15" then
 	brightnesscfg.screen.value = 5
 	brightnesscfg.screen.mapping = {0, 114, 227, 341, 455, 568, 682, 796, 909, 1023};
 	brightnesscfg.screen.setter = function(val)

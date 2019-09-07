@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ `hostname` = "chille-MacBook15" ]; then
+if [ `hostname` = "chille-macbook15" ]; then
 	# MacBook 15" Early 2013 (With retina display)
 
 	# Scale things so they not get too small
