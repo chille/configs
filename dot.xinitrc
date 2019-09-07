@@ -2,6 +2,7 @@
 
 if [ `hostname` = "chille-macbook13" ]; then
 	# Meep
+	echo chille-macbook13
 
 elif [ `hostname` = "chille-macbook15" ]; then
 	# MacBook 15" Early 2013 (With retina display)
@@ -14,6 +15,7 @@ elif [ `hostname` = "chille-macbook15" ]; then
 
 elif [ `hostname` = "chille-desktop" ]; then
 	# Meep
+	echo chille-desktop
 
 fi
 
