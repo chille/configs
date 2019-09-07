@@ -1,6 +1,9 @@
 #!/bin/bash
 
-if [ `hostname` = "chille-macbook15" ]; then
+if [ `hostname` = "chille-macbook13" ]; then
+	# Meep
+
+elif [ `hostname` = "chille-macbook15" ]; then
 	# MacBook 15" Early 2013 (With retina display)
 
 	# Scale things so they not get too small
@@ -10,12 +13,8 @@ if [ `hostname` = "chille-macbook15" ]; then
 	xrandr --output eDP-1-1 --mode 2880x1800
 
 elif [ `hostname` = "chille-desktop" ]; then
-	# For Apple keyboards
-	echo "Setting keymap for Apple keyboard"
+	# Meep
 
-else
-	# For laptop
-	echo "Setting keymap for PC keyboard";
 fi
 
 # Never turn off screen
@@ -27,9 +26,6 @@ xset dpms 3600 3600 3600
 # No screensaver or blanking
 xset s off
 xset s noblank
-
-# Make sure the keys are mapped correctly
-/home/chille/configs/bin/remapkeys.sh other
 
 # Start window manager
 awesome
