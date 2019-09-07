@@ -117,8 +117,7 @@ myawesomemenu = {
 chillemenu = {
 	{ "Windows to left screen",  move_windows_left },
 	{ "Windows to right screen", move_windows_right },
-	{ "No off screen",   move_windows_inside },
-	{ "Toggle on top",   function() toggleontop() end }
+	{ "No off screen",   move_windows_inside }
 }
 
 mymainmenu = awful.menu(
@@ -134,12 +133,6 @@ mymainmenu = awful.menu(
 
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = mymainmenu })
 
-toggleontop = function ()
-	for s = 1, screen.count() do
-		mywibox[s].ontop = not mywibox[s].ontop;
-		mytaskbar[s].ontop = not mytaskbar[s].ontop;
-	end
-end
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -174,7 +167,7 @@ for s = 1, screen.count() do
 	mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
 
 	-- Create the wibox
-	mywibox[s] = awful.wibox({ position = "top", screen = s })
+	mywibox[s] = awful.wibox({ position = "top", ontop = true, screen = s })
 
 	-- Widgets that are aligned to the left
 	local left_layout = wibox.layout.fixed.horizontal()

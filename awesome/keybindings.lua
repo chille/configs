@@ -46,7 +46,7 @@ remapkeys = function ()
 		awful.key({ }, "XF86MonBrightnessDown", function () brightnesscfg.screen_down() end),     -- F1
 		awful.key({ }, "XF86MonBrightnessUp",   function () brightnesscfg.screen_up()   end),     -- F2
 		awful.key({ }, "XF86LaunchA",           function () revelation() end),                    -- F3
-		awful.key({ }, "XF86LaunchB",           function () naughty.notify({text="F4"}) end),     -- F4
+		awful.key({ }, "XF86LaunchB",           function () togglefullscreen() end),              -- F4
 		awful.key({ }, "XF86KbdBrightnessDown", function () brightnesscfg.keyboard_down() end),   -- F5
 		awful.key({ }, "XF86KbdBrightnessUp",   function () brightnesscfg.keyboard_up() end),     -- F6
 		awful.key({ }, "XF86AudioPrev",         function () naughty.notify({text="Prev"}) end),   -- F7
@@ -132,6 +132,11 @@ client.connect_signal("focus", function(c)
 
 	remapkeys()
 end)
+
+togglefullscreen = function ()
+	mywibox[mouse.screen.index].visible = not mywibox[mouse.screen.index].visible;
+	mytaskbar[mouse.screen.index].visible = not mytaskbar[mouse.screen.index].visible;
+end
 
 lockscreen = function ()
 	awful.util.spawn("xscreensaver-command -lock")
