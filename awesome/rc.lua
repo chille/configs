@@ -356,10 +356,6 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
---client.add_signal("property::fullscreen", function()
---	naughty.notify({ text="Fullscreen!" })
---end);
-
 client.connect_signal("focus", function(c)
 	if c.class == "X-terminal-emulator" or c.class == "Roxterm" then
 		os.execute("/home/chille/configs/bin/remapkeys.sh roxterm &")
