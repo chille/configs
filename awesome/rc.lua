@@ -276,20 +276,6 @@ client.connect_signal("request::geometry", function(c, context, ...)
     end
 end)
 
--- TODO
--- {{{ Rules
---awful.rules.rules = {
---		-- All clients will match this rule.
---		{ rule = { instance = "plugin-container" },
---				properties = { floating = true } },
---		{ rule = { instance = "operapluginwrapper-native" },
---				properties = { floating = true } },
-		-- Set Firefox to always map on tags number 2 of screen 1.
-		-- { rule = { class = "Firefox" },
-		--	 properties = { tag = tags[1][2] } },
---}
--- }}}
-
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c, startup)
