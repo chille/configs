@@ -2,6 +2,7 @@ local awful = require("awful")
 local naughty = require("naughty")
 local brightness = require("brightness")
 
+modkey = "Control"
 globalkeys = {}
 
 remapkeys = function (window)
@@ -143,3 +144,5 @@ end
 lockscreen = function ()
 	awful.util.spawn("xscreensaver-command -lock")
 end
+
+remapkeys();

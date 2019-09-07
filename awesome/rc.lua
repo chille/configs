@@ -69,9 +69,7 @@ editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Keyboard bindings
-modkey = "Control"
 require("keybindings");
-remapkeys();
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
@@ -145,9 +143,7 @@ mylayoutbox = {}
 mytaglist = {}
 mytaglist.buttons = awful.util.table.join(
 	awful.button({ }, 1, awful.tag.viewonly),
-	awful.button({ modkey }, 1, awful.client.movetotag),
-	awful.button({ }, 3, awful.tag.viewtoggle),
-	awful.button({ modkey }, 3, awful.client.toggletag)
+	awful.button({ }, 3, awful.tag.viewtoggle)
 )
 
 
