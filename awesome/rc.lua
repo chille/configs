@@ -25,7 +25,6 @@ require("taskbar");
 --require("chille")
 --require("quicklaunch")
 --require("revelation")
-require("batterywidget")
 
 -- Get hostname (Used for some configuration like what settings to use for screen backlight)
 local fd = io.popen("hostname")
@@ -198,9 +197,13 @@ for s = 1, screen.count() do
 	right_layout:add(separator)
 
 	-- Battery status
-	right_layout:add(batterywidget)
-	right_layout:add(fsicon)
-	right_layout:add(separator)
+	if hostname == "chille-macbook13" or hostname == "chille-macbook15" then
+		require("batterywidget")
+
+		right_layout:add(batterywidget)
+		right_layout:add(fsicon)
+		right_layout:add(separator)
+	end
 
 
 	-- Network
