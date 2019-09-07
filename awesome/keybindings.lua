@@ -4,7 +4,17 @@ local brightness = require("brightness")
 
 globalkeys = {}
 
-remapkeys = function ()
+remapkeys = function (window)
+	-- Change the keyboard layout in the X server
+	if window == "X-terminal-emulator" or window == "Roxterm" then
+		os.execute("/home/chille/configs/bin/remapkeys.sh roxterm &")
+		modkey = "Mod4"
+	else
+		os.execute("/home/chille/configs/bin/remapkeys.sh other &")
+		modkey = "Control"
+	end
+
+	-- Remap keys in Awesome
 	globalkeys = awful.util.table.join(
 --		awful.key({ modkey, "Control" }, "o",      function (c) awful.client.movetoscreen(c, 0) end ),
 
@@ -122,15 +132,7 @@ remapkeys = function ()
 end
 
 client.connect_signal("focus", function(c)
-	if c.class == "X-terminal-emulator" or c.class == "Roxterm" then
-		os.execute("/home/chille/configs/bin/remapkeys.sh roxterm &")
-		modkey = "Mod4"
-	else
-		os.execute("/home/chille/configs/bin/remapkeys.sh other &")
-		modkey = "Control"
-	end
-
-	remapkeys()
+	remapkeys(c.class)
 end)
 
 togglefullscreen = function ()

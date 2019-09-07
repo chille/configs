@@ -9,18 +9,13 @@ if [ `hostname` = "chille-macbook15" ]; then
 	# For some reason we need to explicitly set the screen resolution, or else it will be unset and screen will be blank
 	xrandr --output eDP-1-1 --mode 2880x1800
 
-	# Keyboard layout (Similar to OS X)
-	setxkbmap -rules evdev -model evdev -layout chille
-
 elif [ `hostname` = "chille-desktop" ]; then
 	# For Apple keyboards
 	echo "Setting keymap for Apple keyboard"
-	setxkbmap -rules evdev -model evdev -layout chille
 
 else
 	# For laptop
 	echo "Setting keymap for PC keyboard";
-	setxkbmap -rules evdev -model evdev -layout chille -variant mixed
 fi
 
 # Never turn off screen
