@@ -251,7 +251,7 @@ clientbuttons = awful.util.table.join(
 	awful.button({ "Control" }, 1, awful.mouse.client.move),
 	awful.button({ "Control" }, 3, awful.mouse.client.resize),
 	awful.button({ "Mod4" }, 1, awful.mouse.client.move),
-	awful.button({ "Mod4" }, 3, awful.mouse.client.resize))
+	awful.button({ "Mod4" }, 3, awful.mouse.client.resize)
 )
 
 -- }}}
