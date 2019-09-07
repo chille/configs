@@ -43,27 +43,26 @@ remapkeys = function ()
 --			end
 --		),
 
-
 		awful.key({ }, "XF86MonBrightnessDown", function () brightnesscfg.screen_down() end),     -- F1
 		awful.key({ }, "XF86MonBrightnessUp",   function () brightnesscfg.screen_up()   end),     -- F2
 		awful.key({ }, "XF86LaunchA",           function () revelation() end),                    -- F3
-		awful.key({ }, "XF86LaunchB",           function () meep.vroom("F4") end),                -- F4
+		awful.key({ }, "XF86LaunchB",           function () naughty.notify({text="F4"}) end),     -- F4
 		awful.key({ }, "XF86KbdBrightnessDown", function () brightnesscfg.keyboard_down() end),   -- F5
 		awful.key({ }, "XF86KbdBrightnessUp",   function () brightnesscfg.keyboard_up() end),     -- F6
-		awful.key({ }, "XF86AudioPrev",         function () meep.vroom("Prev") end),              -- F7
-		awful.key({ }, "XF86AudioPlay",         function () meep.vroom("Play") end),              -- F8
-		awful.key({ }, "XF86AudioNext",         function () meep.vroom("Next") end),              -- F9
+		awful.key({ }, "XF86AudioPrev",         function () naughty.notify({text="Prev"}) end),   -- F7
+		awful.key({ }, "XF86AudioPlay",         function () naughty.notify({text="Play"}) end),   -- F8
+		awful.key({ }, "XF86AudioNext",         function () naughty.notify({text="Next"}) end),   -- F9
 		awful.key({ }, "XF86AudioMute",         function () volumecfg.toggle() end),              -- F10
 		awful.key({ }, "XF86AudioLowerVolume",  function () volumecfg.down() end),                -- F11
 		awful.key({ }, "XF86AudioRaiseVolume",  function () volumecfg.up() end),                  -- F12
-		awful.key({ }, "XF86Eject",             function () meep.vroom("Eject") end),             -- Eject
+		awful.key({ }, "XF86Eject",             function () naughty.notify({text="Eject"}) end),  -- Eject
 
 		awful.key({ }, "XF86Tools",             function () toggleontop() end),                   -- F13
-		awful.key({ }, "XF86Launch5",           function () meep.vroom("F14") end),               -- F14
-		awful.key({ }, "XF86Launch6",           function () meep.vroom("F15") end),               -- F15
+		awful.key({ }, "XF86Launch5",           function () naughty.notify({text="F14"}) end),    -- F14
+		awful.key({ }, "XF86Launch6",           function () naughty.notify({text="F15"}) end),    -- F15
 
 		awful.key({ }, "XF86Launch7",           function () awful.util.spawn("speedcrunch") end), -- F16
-		awful.key({ }, "XF86Launch8",           function () meep.vroom("F17") end),               -- F17
+		awful.key({ }, "XF86Launch8",           function () naughty.notify({text="F17"}) end),    -- F17
 		awful.key({ }, "XF86Launch9",           function () awesome.restart() end),               -- F18
 		awful.key({ }, "#197",                  function () lockScreen() end)                     -- F19
 	)
@@ -118,20 +117,21 @@ remapkeys = function ()
 		)
 	end
 
-
 	-- Set keys
 	root.keys(globalkeys)
 end
 
+client.connect_signal("focus", function(c)
+	if c.class == "X-terminal-emulator" or c.class == "Roxterm" then
+		os.execute("/home/chille/configs/bin/remapkeys.sh roxterm &")
+		modkey = "Mod4"
+	else
+		os.execute("/home/chille/configs/bin/remapkeys.sh other &")
+		modkey = "Control"
+	end
 
-
-
-
-
-meep = {}
-meep.vroom = function (key)
-	naughty.notify({ text="Hai gaise! You just pressed: " .. key })
-end
+	remapkeys()
+end)
 
 lockscreen = function ()
 	awful.util.spawn("xscreensaver-command -lock")

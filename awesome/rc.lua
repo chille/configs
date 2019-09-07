@@ -36,24 +36,24 @@ fd:close()
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
-		naughty.notify({ preset = naughty.config.presets.critical,
-										 title = "Oops, there were errors during startup!",
-										 text = awesome.startup_errors })
+	naughty.notify({ preset = naughty.config.presets.critical,
+	                 title = "Oops, there were errors during startup!",
+	                 text = awesome.startup_errors })
 end
 
 -- Handle runtime errors after startup
 do
-		local in_error = false
-		awesome.connect_signal("debug::error", function (err)
-				-- Make sure we don't go into an endless error loop
-				if in_error then return end
-				in_error = true
+	local in_error = false
+	awesome.connect_signal("debug::error", function (err)
+		-- Make sure we don't go into an endless error loop
+		if in_error then return end
+		in_error = true
 
-				naughty.notify({ preset = naughty.config.presets.critical,
-												 title = "Oops, an error happened!",
-												 text = err })
-				in_error = false
-		end)
+		naughty.notify({ preset = naughty.config.presets.critical,
+		                 title = "Oops, an error happened!",
+		                 text = err })
+		in_error = false
+	end)
 end
 -- }}}
 
@@ -76,33 +76,33 @@ remapkeys();
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
 {
-		awful.layout.suit.floating,
-		awful.layout.suit.tile,
-		awful.layout.suit.tile.left,
-		awful.layout.suit.tile.bottom,
-		awful.layout.suit.tile.top,
-		awful.layout.suit.fair,
-		awful.layout.suit.fair.horizontal,
-		awful.layout.suit.spiral,
-		awful.layout.suit.spiral.dwindle,
-		awful.layout.suit.max,
---		awful.layout.suit.max.fullscreen,
-		awful.layout.suit.magnifier
+	awful.layout.suit.floating,
+	awful.layout.suit.tile,
+	awful.layout.suit.tile.left,
+	awful.layout.suit.tile.bottom,
+	awful.layout.suit.tile.top,
+	awful.layout.suit.fair,
+	awful.layout.suit.fair.horizontal,
+	awful.layout.suit.spiral,
+	awful.layout.suit.spiral.dwindle,
+	awful.layout.suit.max,
+--	awful.layout.suit.max.fullscreen,
+	awful.layout.suit.magnifier
 }
 -- }}}
 
 -- Wallpaper
 if beautiful.wallpaper then
-		for s = 1, screen.count() do
-				gears.wallpaper.maximized(beautiful.wallpaper, s, true)
-		end
+	for s = 1, screen.count() do
+		gears.wallpaper.maximized(beautiful.wallpaper, s, true)
+	end
 end
 
 -- Tags: Define a tag table which hold all screen tags.
 tags = {}
 for s = 1, screen.count() do
-		-- Each screen has its own tag table.
-		tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
+	-- Each screen has its own tag table.
+	tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
 end
 
 -- {{{ Menu
@@ -144,9 +144,6 @@ end
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 
--- {{{ Wibox
--- Create a textclock widget
-mytextclock = awful.widget.textclock()
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -240,7 +237,7 @@ for s = 1, screen.count() do
 	end
 
 	-- Clock
-	right_layout:add(mytextclock)
+	right_layout:add(awful.widget.textclock())
 
 	-- Layout switcher
 	right_layout:add(mylayoutbox[s])
@@ -274,26 +271,14 @@ local no_fullscreen = true
 local rule = { class = "Firefox" }
 client.disconnect_signal("request::geometry", awful.ewmh.geometry)
 client.connect_signal("request::geometry", function(c, context, ...)
-    if not no_fullscreen or context ~= "fullscreen" or not awful.rules.match(c, rule) then
-        awful.ewmh.geometry(c, context, ...)
-    end
+	if not no_fullscreen or context ~= "fullscreen" or not awful.rules.match(c, rule) then
+		awful.ewmh.geometry(c, context, ...)
+	end
 end)
 
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c, startup)
-		-- Enable sloppy focus
---		c:connect_signal("mouse::enter", function(c)
---				if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
---						and awful.client.focus.filter(c) then
---						client.focus = c
---				end
---		end)
-
-		-- Add a titlebar
-		-- TODO
---		awful.titlebar.add(c, { modkey = modkey })
-
 		if not startup then
 				-- Set the windows at the slave,
 				-- i.e. put it at the end of others instead of setting it master.
@@ -355,15 +340,3 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
-
-client.connect_signal("focus", function(c)
-	if c.class == "X-terminal-emulator" or c.class == "Roxterm" then
-		os.execute("/home/chille/configs/bin/remapkeys.sh roxterm &")
-		modkey = "Mod4"
-	else
-		os.execute("/home/chille/configs/bin/remapkeys.sh other &")
-		modkey = "Control"
-	end
-
-	remapkeys()
-end)
