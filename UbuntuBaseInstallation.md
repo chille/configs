@@ -50,6 +50,9 @@ ln -s /home/chille/configs/awesome/ /home/33chille/.config/awesome
 sudo ln -s /home/chille/configs/keyboardlayout /usr/share/X11/xkb/symbols/chille
 ln -s /home/chille/configs/dot.xinitrc /home/chille/.xinitrc
 
+# Only needed on MacBook 15"
+sudo ln -s /home/chille/configs/Xresources /home/chille/.Xresources
+
 # Sublime
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
 sudo apt-get install apt-transport-https
