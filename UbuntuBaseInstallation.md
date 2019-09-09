@@ -44,13 +44,14 @@ apt-get install software-properties-common # TODO: Still needed with 19.04 mini.
 # Application configuration files
 git clone https://github.com/chille/configs
 ln -s /home/chille/configs/tcshrc /home/chille/.tcshrc
-sudo ln -s /home/chille/configs/tcshrc /root/.tcshrc
 ln -s /home/chille/configs/ROXTerm/ /home/chille/.config/roxterm.sourceforge.net
 ln -s /home/chille/configs/awesome/ /home/33chille/.config/awesome
-sudo ln -s /home/chille/configs/keyboardlayout /usr/share/X11/xkb/symbols/chille
 ln -s /home/chille/configs/dot.xinitrc /home/chille/.xinitrc
+ln -s /home/chille/configs/tmux.conf /home/chille/.tmux.conf
+sudo ln -s /home/chille/configs/tcshrc /root/.tcshrc
+sudo ln -s /home/chille/configs/keyboardlayout /usr/share/X11/xkb/symbols/chille
 
-# Only needed on MacBook 15"
+# Only needed on MacBook 15": DPI Settings
 sudo ln -s /home/chille/configs/Xresources /home/chille/.Xresources
 
 # Sublime
@@ -81,6 +82,19 @@ addgroup chille video
 # If using Ubuntu desktop we need to make sure no GUI is started
 systemctl enable multi-user.target
 systemctl set-default multi-user.target
+
+
+Terminal: st
+------------
+sudo apt-get install libxft-dev
+git clone https://git.suckless.org/st
+cd st
+wget https://st.suckless.org/patches/anysize/st-anysize-0.8.1.diff
+wget https://st.suckless.org/patches/hidecursor/st-hidecursor-0.8.1.diff
+patch < st-anysize-0.8.1.diff
+patch < st-hidecursor-0.8.1.diff
+nano config.h
+make
 
 
 Todo

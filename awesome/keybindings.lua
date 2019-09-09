@@ -7,7 +7,7 @@ globalkeys = {}
 
 remapkeys = function (window)
 	-- Change the keyboard layout in the X server
-	if window == "X-terminal-emulator" or window == "Roxterm" then
+	if window == "X-terminal-emulator" or window == "Roxterm" or window == "st-256color" or window == "tmux" or window == "st" or window == "rxvt" then
 		os.execute("/home/chille/configs/bin/remapkeys.sh roxterm &")
 		modkey = "Mod4"
 	else
