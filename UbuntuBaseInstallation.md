@@ -54,6 +54,11 @@ sudo ln -s /home/chille/configs/keyboardlayout /usr/share/X11/xkb/symbols/chille
 # Only needed on MacBook 15": DPI Settings
 sudo ln -s /home/chille/configs/Xresources /home/chille/.Xresources
 
+# Only needed on MacBook's: mtrack driver
+apt-get install xserver-xorg-input-mtrack
+sudo ln -s /home/chille/configs/50-mtrack.conf /usr/share/X11/xorg.conf.d/50-mtrack.conf
+Disable "libinput touchpad catchall" in /usr/share/X11/xorg.conf.d/40-libinput.conf
+
 # Sublime
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
 sudo apt-get install apt-transport-https
