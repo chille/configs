@@ -19,7 +19,7 @@ echo -e "APT::Install-Recommends \"0\";\nAPT::Install-Suggests \"0\";" >> /etc/a
 apt-get install tcsh
 chsh -s /bin/tcsh
 
-# Standard tools
+# Terminal tools
 apt-get install openssh-server
 apt-get install git
 apt-get install tcc
@@ -29,10 +29,16 @@ apt-get install ntp
 apt-get install nmap
 apt-get install unrar
 apt-get install unzip # TODO: Still needed with 19.04 mini.iso?
+apt-get install tmux
+
+# GUI tools
 apt-get install firefox
 apt-get install wireshark
 apt-get install keepassxc
 apt-get install speedcrunch
+apt-get install okular
+apt-get install mirage
+apt-get install mesa-utils # For glxinfo and glxgears
 
 # apt-file
 apt-get install apt-file
