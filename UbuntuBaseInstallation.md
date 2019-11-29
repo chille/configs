@@ -16,8 +16,8 @@ Installation
 ./InstallScripts/BaseSystem.sh
 ./InstallScripts/GuiTools.sh
 ./InstallScripts/st.sh
-./InstallScripts/MacBook13.sh (UNTESTED)
-./InstallScripts/MacBook15.sh (UNTESTED)
+./InstallScripts/MacBook13.sh
+./InstallScripts/MacBook15.sh
 
 # Only needed on MacBook's: mtrack driver
 apt-get install xserver-xorg-input-mtrack
