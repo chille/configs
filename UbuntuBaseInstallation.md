@@ -15,7 +15,8 @@ Installation
 # Run install scripts
 ./InstallScripts/BaseSystem.sh
 ./InstallScripts/GuiTools.sh
-./InstallScripts/MacBook15.sh (UNTESTED)
+./InstallScripts/st.sh
+./InstallScripts/MacBook13.sh (UNTESTED)
 ./InstallScripts/MacBook15.sh (UNTESTED)
 
 # Only needed on MacBook's: mtrack driver
@@ -27,19 +28,6 @@ Disable "libinput touchpad catchall" in /usr/share/X11/xorg.conf.d/40-libinput.c
 add-apt-repository ppa:h-realh/roxterm
 apt-get update
 apt-get install roxterm
-
-
-Terminal: st
-------------
-sudo apt-get install libxft-dev
-git clone https://git.suckless.org/st
-cd st
-wget https://st.suckless.org/patches/anysize/st-anysize-0.8.1.diff
-wget https://st.suckless.org/patches/hidecursor/st-hidecursor-0.8.1.diff
-patch < st-anysize-0.8.1.diff
-patch < st-hidecursor-0.8.1.diff
-nano config.h
-make
 
 
 Todo
