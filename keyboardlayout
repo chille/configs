@@ -48,8 +48,8 @@ xkb_symbols "basic" {
     };
     modifier_map Mod5   { ISO_Level3_Shift };
 
-    key <LCTL> {        [ Super_L               ]       };
-    key <LWIN> {        [ Control_L             ]       };
+    key <LCTL> { [ Super_L ] };
+    key <LWIN> { [ Control_L ] };
 };
 
 partial alphanumeric_keys
@@ -58,8 +58,8 @@ xkb_symbols "roxterm" {
 
     name[Group1]= "Sweden - Mac - Chille";
 
-    key <LCTL> {        [ Control_L             ]       };
-    key <LWIN> {        [ Super_L               ]       };
+    key <LCTL> { [ Control_L ] };
+    key <LWIN> { [ Super_L ] };
 };
 
 partial alphanumeric_keys 
@@ -68,8 +68,8 @@ xkb_symbols "mixed" {
 
     name[Group1]= "Sweden - Mac, mixed BKSL / TLDE";
 
-    key <LCTL> {        [ Super_L               ]       };
-    key <LWIN> {        [ Control_L             ]       };
+    key <LCTL> { [ Super_L   ] };
+    key <LWIN> { [ Control_L ] };
 
     key <LSGT> { [        less,      greater,           bar,   brokenbar ] };
     key <TLDE> { [     section,       degree                             ] };
@@ -81,8 +81,8 @@ xkb_symbols "mixed_roxterm" {
 
     name[Group1]= "Sweden - Mac, mixed BKSL / TLDE";
 
-    key <LCTL> {        [ Control_L             ]       };
-    key <LWIN> {        [ Super_L               ]       };
+    key <LCTL> { [ Control_L ] };
+    key <LWIN> { [ Super_L   ] };
 
     key <LSGT> { [        less,      greater,           bar,   brokenbar ] };
     key <TLDE> { [     section,       degree                             ] };

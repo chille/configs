@@ -1,28 +1,21 @@
 #!/bin/bash
 
-if [ "$1" = "roxterm" ]; then
-	# Restore keymapping to normal when using the terminal
-	xdotool keyup Ctrl
-
-	if [ `hostname` = "chille-desktop" ]; then
-		setxkbmap -rules evdev -model evdev -layout chille -variant roxterm
-		echo "a"
-	else
-		setxkbmap -rules evdev -model evdev -layout chille -variant mixed_roxterm
-		echo "b"
-	fi
-#	xdotool keydown Super
+# MacBooks have mixed BKSL / TLDE while Apple USB keyboards are correct
+if [ `hostname` = "chille-desktop" ]; then
+	mixed=""
 else
-	# Remap Control_L and Super_L to get more OS X like keybindings in all applications
-	xdotool keyup Super
-
-	if [ `hostname` = "chille-desktop" ]; then
-		setxkbmap -rules evdev -model evdev -layout chille -variant basic
-		echo "c"
-	else
-		setxkbmap -rules evdev -model evdev -layout chille -variant mixed
-		echo "d"
-	fi
-#	sleep 0.2
-#	xdotool keydown Control_L
+	mixed="mixed_"
 fi
+
+# Different layout for terminal and other applications
+if [ "$1" = "roxterm" ]; then
+	application="roxterm"
+else
+	application="basic"
+fi
+
+# Release all pressed keys
+xdotool keyup Super Ctrl Control_L
+
+# Change keymap
+setxkbmap -rules evdev -model evdev -layout chille -variant $mixed$application
