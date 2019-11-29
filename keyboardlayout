@@ -63,7 +63,7 @@ xkb_symbols "roxterm" {
 };
 
 partial alphanumeric_keys 
-xkb_symbols "mixed" {
+xkb_symbols "mixed_basic" {
     include "chille(basic)"
 
     name[Group1]= "Sweden - Mac, mixed BKSL / TLDE";
