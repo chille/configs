@@ -88,3 +88,32 @@ xkb_symbols "mixed_roxterm" {
     key <TLDE> { [     section,       degree                             ] };
 };
 
+partial alphanumeric_keys
+xkb_symbols "dmx" {
+    include "chille(basic)"
+
+    name[Group1]= "DMX special purpose";
+
+    key <LCTL> { [ Super_L   ] };
+    key <LWIN> { [ Control_L ] };
+
+    key <KP1>  { [ 1        ] }; // 1
+    key <KP2>  { [ 2        ] }; // 2
+    key <KP3>  { [ 3        ] }; // 3
+    key <KP4>  { [ 4        ] }; // 4
+    key <KP5>  { [ 5        ] }; // 5
+    key <KP6>  { [ 6        ] }; // 6
+    key <KP7>  { [ 7        ] }; // 7
+    key <KP8>  { [ 8        ] }; // 8
+    key <KP9>  { [ 9        ] }; // 9
+    key <KP0>  { [ 0        ] }; // 0
+    key <KPDL> { [ period   ] }; // .
+
+    key <NMLK> { [ at       ] }; // Num lock
+    key <KPEQ> { [ equal    ] }; // =
+    key <KPDV> { [ slash    ] }; // /
+    key <KPMU> { [ asterisk ] }; // *
+    key <KPSU> { [ minus    ] }; // -
+    key <KPAD> { [ plus     ] }; // +
+    key <KPEN> { [ c        ] }; // TODO: Enter
+};
