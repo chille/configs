@@ -17,7 +17,9 @@ sudo -- apt-get install -y --no-install-recommends \
 	tmux \
 	tcsh \
 	apt-file \
-	software-properties-common
+	software-properties-common \
+	curl \
+	docker.io
 
 # Note software-properties-common is for add-apt-repository
 # TODO: Is unzip still needed with 19.04 mini.iso?

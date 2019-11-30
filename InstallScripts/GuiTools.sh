@@ -9,9 +9,15 @@ sudo apt-get install -y --no-install-recommends \
 	speedcrunch \
 	okular \
 	mirage \
-	mesa-utils
+	mesa-utils \
+	nextcloud-desktop
 
 # Note mesa-utils is for glxinfo and glxgears
+
+# Sublime configuration
+mkdir -p /home/chille/.config/sublime-text-3/Packages/User
+ln -s /home/chille/configs/Sublime3/Default\ \(Linux\).sublime-keymap /home/chille/.config/sublime-text-3/Packages/User/
+ln -s /home/chille/configs/Sublime3/Preferences.sublime-settings /home/chille/.config/sublime-text-3/Packages/User/
 
 # Sublime
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
@@ -29,7 +35,3 @@ ln -s /home/chille/configs/ROXTerm/ /home/chille/.config/roxterm.sourceforge.net
 ln -s /home/chille/configs/awesome/ /home/chille/.config/awesome/
 ln -s /home/chille/configs/dot.xinitrc /home/chille/.xinitrc
 sudo ln -s /home/chille/configs/keyboardlayout /usr/share/X11/xkb/symbols/chille
-
-# Sublime configuration
-mkdir -p /home/chille/.config/sublime-text-3/Packages/User
-ln -s /home/chille/configs/Sublime3/Default\ \(Linux\).sublime-keymap /home/chille/.config/sublime-text-3/Packages/User/

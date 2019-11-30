@@ -1,5 +1,11 @@
 #!/bin/bash
 
+sudo apt-get install --no-install-recommends -y \
+	wicd-gtk \
+	virtualbox \
+	virtualbox-qt \
+	virtualbox-guest-additions-iso
+
 # Only needed on MacBook 15": DPI Settings
 sudo ln -s /home/chille/configs/Xresources /home/chille/.Xresources
 
