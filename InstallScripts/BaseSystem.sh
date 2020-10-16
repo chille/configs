@@ -23,7 +23,7 @@ sudo -- apt-get install -y --no-install-recommends \
 # Note software-properties-common is for add-apt-repository
 # TODO: Is unzip still needed with 19.04 mini.iso?
 # TODO: Is software-properties-common still needed with 19.04 mini.iso?
-# TODO: Replaces ntp with systemd-timesyncd, is it already included in mini.iso?
+# TODO: Replaced ntp with systemd-timesyncd, is it already included in mini.iso?
 
 # Change shell
 chsh -s /bin/tcsh
