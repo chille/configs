@@ -7,7 +7,6 @@ echo -e "APT::Install-Recommends \"0\";\nAPT::Install-Suggests \"0\";" | sudo te
 sudo -- apt-get install -y --no-install-recommends \
 	openssh-server \
 	git \
-	tcc \
 	tree \
 	htop \
 	systemd-timesyncd \
