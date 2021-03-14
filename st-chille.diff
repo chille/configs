@@ -1,0 +1,43 @@
+diff --git a/st.c b/st.c
+index ede7ae6..85bc479 100644
+--- a/st.c
++++ b/st.c
+@@ -1947,6 +1947,26 @@ strreset(void)
+ 	memset(&strescseq, 0, sizeof(strescseq));
+ }
+ 
++void
++shortcut(const Arg *arg)
++{
++	// 17 F6
++	// 18 F7
++	// 19 F8
++	// 23 F11
++	switch(arg->i)
++	{
++		case 0:  ttywrite("\033[24;3~", 7, 0);    break; // Alt+F12
++		case 1:  ttywrite("\033[1;3P",  6, 0);    break; // Alt+F1
++		case 2:  ttywrite("\033[1;3Q",  6, 0);    break; // Alt+F2
++		case 3:  ttywrite("\033[1;3R",  6, 0);    break; // Alt+F3
++		case 4:  ttywrite("\033[1;3S",  6, 0);    break; // Alt+F4
++		case 5:  ttywrite("\033[20;3~", 7, 0);    break; // Alt+F9
++		case 6:  ttywrite("\033[23;3~", 7, 0);    break; // Alt+F11
++		default: printf("Unknown: %i\n", arg->i); break;
++	}
++}
++
+ void
+ sendbreak(const Arg *arg)
+ {
+diff --git a/st.h b/st.h
+index 4da3051..f94ca0f 100644
+--- a/st.h
++++ b/st.h
+@@ -83,6 +83,7 @@ void draw(void);
+ void printscreen(const Arg *);
+ void printsel(const Arg *);
+ void sendbreak(const Arg *);
++void shortcut(const Arg *);
+ void toggleprinter(const Arg *);
+ 
+ int tattrset(int);

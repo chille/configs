@@ -8,6 +8,9 @@ cd ~/configs/
 git clone https://git.suckless.org/st
 cd st/
 
+# Apply local patches
+patch < ../st-chille.diff
+
 # Download and apply patches
 wget https://st.suckless.org/patches/anysize/st-anysize-0.8.1.diff
 wget https://st.suckless.org/patches/hidecursor/st-hidecursor-0.8.3.diff
