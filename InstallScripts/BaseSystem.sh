@@ -6,7 +6,6 @@ echo -e "APT::Install-Recommends \"0\";\nAPT::Install-Suggests \"0\";" | sudo te
 # Terminal tools
 sudo -- apt-get install -y --no-install-recommends \
 	openssh-server \
-	git \
 	tree \
 	htop \
 	systemd-timesyncd \
@@ -32,7 +31,6 @@ chsh -s /bin/tcsh
 sudo apt-file update
 
 # Application configuration files
-git clone https://github.com/chille/configs /home/chille/configs
 ln -s /home/chille/configs/tcshrc /home/chille/.tcshrc
 ln -s /home/chille/configs/tmux.conf /home/chille/.tmux.conf
 sudo ln -s /home/chille/configs/tcshrc /root/.tcshrc
