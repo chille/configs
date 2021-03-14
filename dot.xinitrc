@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ `hostname` = "chille-macbook13" ]; then
-	# Meep
+	# MacBook 13"
 	echo chille-macbook13
 
 elif [ `hostname` = "chille-macbook15" ]; then
@@ -16,8 +16,8 @@ elif [ `hostname` = "chille-macbook15" ]; then
 	xrandr --output DP-2 --mode 2880x1800
 
 elif [ `hostname` = "chille-desktop" ]; then
-	# Meep
-	echo chille-desktop
+	# Desktop computer
+	xrandr --output DVI-0 --left-of DisplayPort-0
 
 fi
 
