@@ -108,24 +108,24 @@ unsigned int tabspaces = 8;
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	/* 8 normal colors */
-	"black",
+	"#282923", // Sublime black3
 	"red3",
 	"green3",
 	"yellow3",
-	"blue2",
+	"#67D8EF", // Sublime blue
 	"magenta3",
 	"cyan3",
 	"gray90",
 
 	/* 8 bright colors */
 	"gray50",
-	"red",
-	"green",
-	"yellow",
+	"#f92472", // Sublime red2
+	"#A6E22C", // Sublime yellow2 (Green in reality)
+	"#E7DB74", // Sublime yellow2
 	"#5c5cff",
 	"magenta",
 	"cyan",
-	"white",
+	"#F8F8F1", // Sublime white2
 
 	[255] = 0,
 
