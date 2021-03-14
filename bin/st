@@ -1,1 +1,9 @@
-/home/chille/configs/st/st -z 13
+#!/bin/bash
+
+if [ `hostname` = "chille-macbook15" ]; then
+	/home/chille/configs/st/st -z 20
+
+elif [ `hostname` = "chille-desktop" ]; then
+	/home/chille/configs/st/st -z 13
+
+fi
