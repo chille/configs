@@ -2,7 +2,6 @@
 
 # GUI tools
 sudo apt-get install -y --no-install-recommends \
-	awesome \
 	firefox \
 	wireshark \
 	keepassxc \
@@ -26,12 +25,11 @@ echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sou
 sudo apt-get update
 sudo apt-get install sublime-text
 
+# ROXTerm
+sudo add-apt-repository ppa:h-realh/roxterm
+sudo apt-get update
+sudo apt-get install roxterm
+
 # If using Ubuntu desktop we need to make sure no GUI is started
 sudo systemctl enable multi-user.target
 sudo systemctl set-default multi-user.target
-
-# Application configuration files
-ln -s /home/chille/configs/ROXTerm/ /home/chille/.config/roxterm.sourceforge.net/
-ln -s /home/chille/configs/awesome/ /home/chille/.config/awesome/
-ln -s /home/chille/configs/dot.xinitrc /home/chille/.xinitrc
-sudo ln -s /home/chille/configs/keyboardlayout /usr/share/X11/xkb/symbols/chille
