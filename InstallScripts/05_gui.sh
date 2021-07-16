@@ -11,8 +11,16 @@ apt-get install --yes \
 	xserver-xorg-core \
 	xserver-xorg-video-fbdev \
 	xserver-xorg-input-evdev \
+	x11-xserver-utils \
 	awesome \
-	xinit
+	xinit \
+	mesa-utils
+
+# Note: x11-xserver-utils is used for xset
+# Note: mesa-utils is for glxinfo and glxgears
+
+# Needed to get access to /dev/fb0 when using fbdev driver
+addgroup $USERNAME video
 
 # Application configuration files
 sudo -H -u $USERNAME mkdir -p /home/$USERNAME/.config

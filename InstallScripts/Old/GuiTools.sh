@@ -8,10 +8,8 @@ sudo apt-get install -y --no-install-recommends \
 	speedcrunch \
 	okular \
 	mirage \
-	mesa-utils \
 	nextcloud-desktop
 
-# Note mesa-utils is for glxinfo and glxgears
 
 # Sublime configuration
 mkdir -p /home/chille/.config/sublime-text-3/Packages/User
