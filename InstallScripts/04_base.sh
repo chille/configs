@@ -60,3 +60,32 @@ sudo -H -u $USERNAME git clone https://github.com/chille/configs /home/$USERNAME
 sudo -H -u $USERNAME ln -s /home/chille/configs/tcshrc /home/$USERNAME/.tcshrc
 sudo -H -u $USERNAME ln -s /home/chille/configs/tmux.conf /home/$USERNAME/.tmux.conf
 ln -s /home/chille/configs/tcshrc /root/.tcshrc
+
+# Set locale to use the English language, but Swedish numbers, currency, etc
+locale-gen --purge en_US.UTF-8 sv_SE.UTF-8
+update-locale \
+	LANG=en_US.UTF-8 \
+	LC_NAME=sv_SE.UTF-8 \
+	LC_IDENTIFICATION=sv_SE.UTF-8 \
+	LC_MEASUREMENT=sv_SE.UTF-8 \
+	LC_NUMERIC=sv_SE.UTF-8 \
+	LC_TIME=sv_SE.UTF-8 \
+	LC_PAPER=sv_SE.UTF-8 \
+	LC_MONETARY=sv_SE.UTF-8 \
+	LC_TELEPHONE=sv_SE.UTF-8 \
+	LC_CTYPE=en_US.UTF-8 \
+	LC_ADDRESS=sv_SE.UTF-8
+dpkg-reconfigure --frontend noninteractive locales
+
+# Set timezone to Europe/Stockholm
+ln -fs /usr/share/zoneinfo/Europe/Stockholm /etc/localtime
+dpkg-reconfigure --frontend noninteractive tzdata
+
+# Set keyboard layout to Swedish Mac keyboard
+cat << 'EOF' > /etc/default/keyboard
+XKBMODEL="pc105"
+XKBLAYOUT="se"
+XKBVARIANT="mac"
+XKBOPTIONS=""
+BACKSPACE="guess"
+EOF
