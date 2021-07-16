@@ -25,6 +25,10 @@ generatesourceslist > /etc/apt/sources.list
 # Update our repositories
 apt-get update
 
+# The added repositories might come with updated software
+apt-get upgrade --yes
+apt-get dist-upgrade --yes
+
 # Install some basic tools
 apt-get install --no-install-recommends --yes \
 	tcsh \
@@ -42,12 +46,20 @@ apt-get install --no-install-recommends --yes \
 	curl \
 	git \
 	software-properties-common \
-	locate
+	locate \
+	pciutils \
+	usbutils
+
+# Note: software-properties-common is for add-apt-repository
+# Note: pciutils is for lspci
+# Note: usbutils is for lsusb
+
+# Cleanup after installation and update
+apt-get autoremove
+apt-get autoclean
 
 # Update locate database
 updatedb
-
-# Note software-properties-common is for add-apt-repository
 
 # Change shell to tcsh
 usermod --shell /bin/tcsh $USERNAME
