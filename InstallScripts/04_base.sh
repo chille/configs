@@ -48,7 +48,10 @@ apt-get install --no-install-recommends --yes \
 	software-properties-common \
 	locate \
 	pciutils \
-	usbutils
+	usbutils \
+	smartmontools \
+	man \
+	tldr
 
 # Note: software-properties-common is for add-apt-repository
 # Note: pciutils is for lspci
@@ -60,6 +63,9 @@ apt-get autoclean
 
 # Update locate database
 updatedb
+
+# Update TLDR database
+sudo -H -u $USERNAME tldr --update
 
 # Change shell to tcsh
 usermod --shell /bin/tcsh $USERNAME
