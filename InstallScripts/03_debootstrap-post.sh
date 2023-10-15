@@ -19,6 +19,19 @@ apt install --yes --no-install-recommends linux-image-generic
 
 apt install --yes --no-install-recommends tiny-initramfs
 
+# Create a new sources.list with all repositories enabled
+generatesourceslist() {
+	cat <<EOF
+deb     http://archive.ubuntu.com/ubuntu hirsute          main universe restricted multiverse
+deb-src http://archive.ubuntu.com/ubuntu hirsute          main universe restricted multiverse
+deb     http://archive.ubuntu.com/ubuntu hirsute-updates  main universe restricted multiverse
+deb-src http://archive.ubuntu.com/ubuntu hirsute-updates  main universe restricted multiverse
+deb     http://archive.ubuntu.com/ubuntu hirsute-security main universe restricted multiverse
+deb-src http://archive.ubuntu.com/ubuntu hirsute-security main universe restricted multiverse
+EOF
+}
+generatesourceslist > /etc/apt/sources.list
+
 # Create user and set password
 useradd --groups sudo --create-home $USERNAME
 passwd $USERNAME

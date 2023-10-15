@@ -9,19 +9,6 @@ check_root
 # Turn off recommends/suggests - do not install annoying crap
 echo -e "APT::Install-Recommends \"0\";\nAPT::Install-Suggests \"0\";" > /etc/apt/apt.conf.d/99no-install-recommends
 
-# Create a new sources.list with all repositories enabled
-generatesourceslist() {
-	cat <<EOF
-deb     http://archive.ubuntu.com/ubuntu hirsute          main universe restricted multiverse
-deb-src http://archive.ubuntu.com/ubuntu hirsute          main universe restricted multiverse
-deb     http://archive.ubuntu.com/ubuntu hirsute-updates  main universe restricted multiverse
-deb-src http://archive.ubuntu.com/ubuntu hirsute-updates  main universe restricted multiverse
-deb     http://archive.ubuntu.com/ubuntu hirsute-security main universe restricted multiverse
-deb-src http://archive.ubuntu.com/ubuntu hirsute-security main universe restricted multiverse
-EOF
-}
-generatesourceslist > /etc/apt/sources.list
-
 # Update our repositories
 apt-get update
 
