@@ -16,13 +16,22 @@ if [ ! -d "$MOUNTPOINT/mnt/host" ]; then
 fi
 
 # Bind mount everything needed
-mount --rbind /dev  $MOUNTPOINT/dev
-mount --rbind /proc $MOUNTPOINT/proc
-mount --rbind /sys  $MOUNTPOINT/sys
+mount --rbind /dev $MOUNTPOINT/dev
+mount --make-rslave $MOUNTPOINT/dev
+mount -t proc /proc $MOUNTPOINT/proc
+mount -t sysfs /sys $MOUNTPOINT/sys
 mount --bind . $MOUNTPOINT/mnt/host
 
 # chroot into the system
 echo "Chrooting into system"
-chroot $MOUNTPOINT bash --login
 
-# TODO: Should we unmount? Is it possible to do a recusrive unmount (the opposite to mount --rbind)?
+if [ ! -f /usr/bin/tcsh ]; then
+	chroot $MOUNTPOINT bash --login
+else
+	chroot $MOUNTPOINT tcsh
+fi
+
+# Unmount everything
+sudo umount --recursive /mnt/target
+
+echo "Exited from chrooted system"

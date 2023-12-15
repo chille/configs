@@ -1,13 +1,21 @@
 #!/bin/bash
 
 # Include configuration
-source config.sh
+#source config.sh
+source "${BASH_SOURCE%/*}/config.sh"
 
 check_root () {
 	# Check that the script is executed by root
 	if [ "$EUID" -ne 0 ]; then
 		echo "Please run as root"
 		exit
+	fi
+}
+
+run_as_root () {
+	if [[ ($USER != root) ]]; then
+		sudo $0 $1
+		exit 0
 	fi
 }
 
@@ -38,5 +46,11 @@ mount_device () {
 	if ! grep -qs "$DEVICE $MOUNTPOINT " /proc/mounts; then
 		echo "Error: Could not mount filesystem"
 		exit
+	fi
+}
+
+apt_update () {
+	if [ `find /var/lib/apt/periodic/update-success-stamp -mmin +10` ]; then
+		sudo apt-get update
 	fi
 }

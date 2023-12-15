@@ -23,10 +23,4 @@ if [ "$files2" != "lost+found" ]; then
 fi
 
 # Install Ubuntu 21.04
-debootstrap hirsute $MOUNTPOINT
-
-# Set hostname
-echo $HOSTNAME > $MOUNTPOINT/etc/hostname
-
-# Add hostname to /etc/hosts
-sed -i "s/127.0.0.1\tlocalhost/127.0.0.1\tlocalhost\n127.0.1.1\t${HOSTNAME}/g" $MOUNTPOINT/etc/hosts
+debootstrap kinetic $MOUNTPOINT
