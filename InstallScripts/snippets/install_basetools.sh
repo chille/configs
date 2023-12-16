@@ -28,7 +28,9 @@ sudo apt-get install --yes --no-install-recommends \
 	usbutils \
 	locate \
 	man \
-	tldr
+	tldr \
+	lm-sensors \
+	cryptsetup-bin
 
 # Note: software-properties-common is for add-apt-repository
 # Note: pciutils is for lspci

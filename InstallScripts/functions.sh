@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Include configuration
-#source config.sh
-source "${BASH_SOURCE%/*}/config.sh"
+source config.sh
+#source "${BASH_SOURCE%/*}/config.sh"
 
 check_root () {
 	# Check that the script is executed by root
