@@ -3,3 +3,4 @@ ssh/id_rsa*
 ssh/known_hosts
 private/*
 st/
+InstallScripts/config.sh
