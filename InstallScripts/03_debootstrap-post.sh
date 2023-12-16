@@ -28,14 +28,14 @@ echo -e "UUID=`blkid -s UUID -o value $DEVICE`\t/\text4\terrors=remount-ro\t0\t1
 # Create a new sources.list with all repositories enabled
 generatesourceslist() {
 	cat <<EOF
-deb      http://se.archive.ubuntu.com/ubuntu/ kinetic           main universe restricted multiverse
-deb-src  http://se.archive.ubuntu.com/ubuntu/ kinetic           main universe restricted multiverse
-deb      http://se.archive.ubuntu.com/ubuntu/ kinetic-updates   main universe restricted multiverse
-deb-src  http://se.archive.ubuntu.com/ubuntu/ kinetic-updates   main universe restricted multiverse
-deb      http://security.ubuntu.com/ubuntu    kinetic-security  main universe restricted multiverse
-deb-src  http://security.ubuntu.com/ubuntu    kinetic-security  main universe restricted multiverse
-#deb     http://se.archive.ubuntu.com/ubuntu/ kinetic-backports main universe restricted multiverse
-#deb-src http://se.archive.ubuntu.com/ubuntu/ kinetic-backports main universe restricted multiverse
+deb      http://se.archive.ubuntu.com/ubuntu/ mantic           main universe restricted multiverse
+deb-src  http://se.archive.ubuntu.com/ubuntu/ mantic           main universe restricted multiverse
+deb      http://se.archive.ubuntu.com/ubuntu/ mantic-updates   main universe restricted multiverse
+deb-src  http://se.archive.ubuntu.com/ubuntu/ mantic-updates   main universe restricted multiverse
+deb      http://security.ubuntu.com/ubuntu    mantic-security  main universe restricted multiverse
+deb-src  http://security.ubuntu.com/ubuntu    mantic-security  main universe restricted multiverse
+#deb     http://se.archive.ubuntu.com/ubuntu/ mantic-backports main universe restricted multiverse
+#deb-src http://se.archive.ubuntu.com/ubuntu/ mantic-backports main universe restricted multiverse
 EOF
 }
 generatesourceslist > /etc/apt/sources.list

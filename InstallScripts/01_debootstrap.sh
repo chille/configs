@@ -22,5 +22,5 @@ if [ "$files2" != "lost+found" ]; then
 	exit
 fi
 
-# Install Ubuntu 21.04
-debootstrap kinetic $MOUNTPOINT
+# Install Ubuntu 23.10
+debootstrap mantic $MOUNTPOINT
